@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self' data: blob:; connect-src 'self' https://pydolarvenezuela-api.vercel.app https://ve.dolarapi.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#801593">
+<meta name="description" content="Catálogo de Dulcito Abril: tortas de vitrina, promociones del mes, línea saludable y tortas personalizadas. Precios en dólares y bolívares a tasa BCV.">
+<title>Catálogo - Dulcito Abril</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Damion&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Misma identidad que la página principal (index.html): fondos claros que alternan,
+     splash de crema como único elemento gráfico (morado = clásica, azul = saludable),
+     Poppins para el texto y Damion para las frases. */
+  :root {
+    color-scheme: light;
+    /* Paleta oficial del catálogo */
+    --morado: #801593;
+    --lavanda-medio: #9370db;
+    --lavanda: #BDA0EB;
+    --bg-lila: #e3d7f4;
+    --bg-azul: #f2f9ff;
+    --azul: #b6d7f2;
+    --indigo: #3f51b5;
+    --indigo-hover: #33449f;
+    --blanco: #ffffff;
+    /* Tonos que usa la página principal en fotos, frases y botones del hero */
+    --lila: #9b72e3;
+    --lavanda-fuerte: #ad88e6;
+    --verde-bg: #e8f5e9;
+    --verde-borde: #a5d6a7;
+    --verde-txt: #2e7d32;
+    --linea: rgba(128, 21, 147, .14);
+    --sombra: 0 10px 30px rgba(128, 21, 147, .08);
+    --sombra-hover: 0 18px 40px rgba(128, 21, 147, .15);
+    --f-sans: "Poppins", "Segoe UI", system-ui, sans-serif;
+    --f-script: "Damion", "Brush Script MT", cursive;
+    --t-script: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
+    --t-h1: clamp(2.2rem, 1.4rem + 3.4vw, 3.9rem);
+    --t-h2: clamp(1.8rem, 1.3rem + 2vw, 2.7rem);
+    --radio: 24px;
+    --ancho: 1160px;
+    --h-top: 71px;
+    --h-sub: 58px;
+    /* Splash real de la marca (mismos archivos que la página principal) */
+    --img-splash: url("assets/splash-morado.png");
+    --img-splash-azul: url("assets/splash-azul.png");
+    /* Silueta de splash para íconos pequeños (funciona también al abrir el archivo con doble clic) */
+    --splash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M44 28c22-22 58-12 80-20 26-9 54 6 58 34 4 24-18 34-12 56 6 20 28 28 20 54-8 28-44 24-66 30-24 6-40 30-68 18-30-12-14-46-28-68C16 114-8 96 6 68 14 52 28 44 44 28z'/%3E%3C/svg%3E");
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg-azul); color: var(--morado); font-family: var(--f-sans); font-weight: 300; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body.modal-abierto { overflow: hidden; }
+  img, svg { max-width: 100%; }
+  img { display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  h1, h2 { font-weight: 700; color: var(--indigo); line-height: 1.12; letter-spacing: -.01em; }
+  h1 { font-size: var(--t-h1); }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: 1.15rem; font-weight: 500; color: var(--morado); line-height: 1.3; }
+  p { margin: 0; }
+  .script { font-family: var(--f-script); font-weight: 400; color: var(--morado); font-size: var(--t-script); line-height: 1.1; display: block; }
+  .wrap { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: 20px; position: relative; z-index: 1; }
+  :focus-visible { outline: 3px solid var(--lila); outline-offset: 3px; border-radius: 8px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Marca de agua: splash de crema real, muy tenue (como en la página principal) */
+  .splash { position: absolute; pointer-events: none; z-index: 0; aspect-ratio: 760 / 710;
+    background: var(--img-splash) center / contain no-repeat; }
+  .splash.a { background-image: var(--img-splash-azul); }
+  .splash.b { filter: brightness(0) invert(1); }
+
+  /* ---------- Cabecera + Tasa BCV ---------- */
+  .top { position: sticky; top: 0; z-index: 100; background: rgba(242, 249, 255, .88);
+    backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid var(--linea); }
+  .top .wrap { display: flex; align-items: center; gap: 18px; padding-block: 10px; }
+  .logo { display: inline-flex; margin-right: auto; }
+  .logo img { height: 50px; width: auto; }
+  .top-inicio { display: inline-flex; align-items: center; gap: 6px; font-size: .9rem; font-weight: 500; text-decoration: none; color: var(--morado); opacity: .85; transition: color .2s, opacity .2s; }
+  .top-inicio:hover { opacity: 1; color: var(--indigo); }
+  .top-inicio svg { width: 17px; height: 17px; transform: rotate(180deg); }
+  .tasa-bcv { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px;
+    background: var(--azul); color: var(--morado); font-size: .84rem; font-weight: 500; white-space: nowrap; }
+  .tasa-bcv strong { font-weight: 700; color: var(--indigo); }
+  .indicador { width: 10px; height: 10px; border-radius: 50%; background: #ccc; border: 1px solid rgba(0, 0, 0, .15); flex: none; }
+  .indicador.activo { background: #4caf50; border-color: #4caf50; box-shadow: 0 0 0 4px rgba(76, 175, 80, .22); }
+  @media (max-width: 640px) { .top-inicio { display: none; } }
+  @media (max-width: 420px) { .logo img { height: 42px; } .tasa-lbl { display: none; } .tasa-bcv { padding: 7px 12px; } }
+
+  /* ---------- Hero del catálogo (mismo fondo, splash y torta flotando que el inicio) ---------- */
+  .hero-cat { position: relative; z-index: 2; color: var(--bg-lila);
+    background: radial-gradient(70% 90% at 85% 10%, rgba(173, 136, 230, .35), transparent 60%), linear-gradient(180deg, #8c1ea1 0%, var(--morado) 70%);
+    padding: clamp(40px, 6vw, 76px) 0 clamp(28px, 4vw, 48px);
+    margin-bottom: clamp(150px, 17vw, 320px); }
+  .hero-deco { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .hero-cat .splash { width: 420px; opacity: .07; }
+  .hero-cat .s1 { left: -150px; top: -150px; transform: rotate(-30deg); }
+  .hero-cat .wrap { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(24px, 5vw, 64px); }
+  .hero-texto { display: grid; gap: 20px; justify-items: start; min-width: 0; }
+  .hero-texto .script { color: var(--bg-lila); font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem); }
+  .hero-texto h1 { color: var(--blanco); }
+  .hero-texto h1 em { font-style: normal; color: var(--lavanda); }
+  .hero-texto .lead { max-width: 46ch; font-size: 1.08rem; }
+  .hero-datos { display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: .86rem; font-weight: 400; }
+  .hero-datos span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-datos span::before { content: ""; width: 17px; height: 16px; flex: none; background: var(--lavanda);
+    -webkit-mask: var(--splash) center / contain no-repeat; mask: var(--splash) center / contain no-repeat; }
+  .hero-acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 4px; }
+  .hero-visual { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1 / .93; justify-self: center; display: grid; place-items: center; }
+  .hero-visual .hero-splash { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); opacity: .93; transform: scale(1.06); }
+  .hero-visual .pastel { position: relative; width: 90%; height: auto; filter: drop-shadow(0 26px 22px rgba(40, 10, 60, .45)); animation: flotar 6s ease-in-out infinite; }
+  .hero-visual .sello { position: absolute; right: 2%; bottom: 6%; background: var(--indigo); color: var(--blanco);
+    font-family: var(--f-script); font-size: clamp(1.25rem, 1rem + .8vw, 1.6rem); line-height: 1; padding: 13px 22px 11px; border-radius: 999px;
+    transform: rotate(-6deg); box-shadow: 0 16px 30px -14px rgba(20, 0, 30, .6); }
+  @keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
+  .hero-cat .drip { position: absolute; left: 0; top: calc(100% - 2px); width: 100%; aspect-ratio: 1440 / 250; min-height: 140px;
+    z-index: 1; pointer-events: none; filter: drop-shadow(0 7px 8px rgba(128, 21, 147, .22)); }
+  @media (max-width: 900px) {
+    .hero-cat .wrap { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 340px; }
+  }
+
+  /* ---------- Botones (mismo estilo que la página principal) ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px 22px;
+    border-radius: 999px; border: 2px solid transparent; font-family: var(--f-sans); font-weight: 600; font-size: .98rem;
+    text-decoration: none; cursor: pointer; transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease, color .2s ease, border-color .2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn svg { width: 19px; height: 19px; flex: none; fill: currentColor; }
+  .btn-cta { background: var(--indigo); color: var(--blanco); box-shadow: 0 12px 24px -14px rgba(63, 81, 181, .8); }
+  .btn-cta:hover { background: var(--indigo-hover); }
+  .btn-personalizada { background: var(--morado); color: var(--blanco); box-shadow: 0 12px 24px -14px rgba(128, 21, 147, .8); }
+  .btn-personalizada:hover { background: #6b1180; }
+  .btn-hero { width: auto; padding: 14px 28px; }
+  .btn-lila { background: var(--lila); color: var(--blanco); box-shadow: 0 16px 30px -16px rgba(20, 0, 30, .6); }
+  .btn-lila:hover { background: var(--lavanda-fuerte); }
+  .btn-borde { background: transparent; color: var(--blanco); border-color: rgba(255, 255, 255, .7); }
+  .btn-borde:hover { background: var(--blanco); color: var(--morado); border-color: var(--blanco); }
+  @media (max-width: 600px) { .btn-hero { padding: 13px 20px; font-size: .92rem; } }
+
+  /* ---------- Información de interés ---------- */
+  .info { padding-bottom: 40px; }
+  .info-caja { position: relative; overflow: hidden; background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra); padding: clamp(22px, 4vw, 40px); }
+  .info-caja::before { content: ""; position: absolute; right: -90px; top: -90px; width: 260px; aspect-ratio: 760 / 710; opacity: .06; pointer-events: none;
+    background: var(--img-splash) center / contain no-repeat; transform: rotate(40deg); }
+  .info-cab { position: relative; display: grid; justify-items: center; text-align: center; gap: 2px; margin-bottom: 28px; }
+  .info-cab .script { color: var(--lavanda-fuerte); font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); }
+  .info-cab h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); }
+  .info-grid { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(22px, 4vw, 44px); align-items: start; }
+  .tiles { display: grid; gap: 18px; }
+  .tile-info { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; }
+  .tile-info .ico { width: 48px; height: 48px; border-radius: 16px; background: var(--bg-lila); color: var(--morado); display: grid; place-items: center; }
+  .tile-info .ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .tile-info h3 { font-size: 1rem; font-weight: 600; color: var(--indigo); margin-bottom: 2px; }
+  .tile-info p { font-size: .92rem; }
+  .tile-info strong { font-weight: 600; }
+  .puntos { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .puntos li { background: var(--bg-azul); border: 1px solid var(--azul); border-radius: 999px; padding: 4px 12px; font-size: .8rem; font-weight: 500; color: var(--indigo); }
+  .guia { background: var(--bg-azul); border-radius: 20px; padding: 20px; }
+  .guia h3 { color: var(--indigo); font-weight: 600; margin-bottom: 12px; }
+  .tamanos { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .tamanos li { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: center; background: var(--blanco); border-radius: 14px; padding: 8px 14px 8px 8px; box-shadow: 0 4px 12px rgba(128, 21, 147, .05); }
+  .disco-slot { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--bg-lila); }
+  .disco { width: calc(var(--d) * 1.45px); height: calc(var(--d) * 1.45px); border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff 0 18%, var(--lavanda) 19% 62%, var(--lavanda-medio) 63%); box-shadow: 0 3px 6px rgba(128, 21, 147, .3); }
+  .tamanos strong { display: block; font-weight: 600; font-size: .95rem; color: var(--morado); line-height: 1.25; }
+  .tamanos small { font-size: .82rem; }
+  .tamanos-nota { display: block; margin-top: 10px; font-size: .8rem; font-style: italic; opacity: .85; }
+  @media (max-width: 860px) { .info-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Menú flotante ---------- */
+  .sub-menu-bar { position: sticky; top: var(--h-top); z-index: 90; background: rgba(242, 249, 255, .93);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-block: 1px solid var(--linea); box-shadow: 0 6px 18px rgba(128, 21, 147, .05); }
+  .sub-menu { display: flex; justify-content: center; align-items: center; gap: 6px; padding-block: 9px; }
+  .sub-menu a { display: inline-block; padding: 8px 18px; border-radius: 999px; color: var(--indigo); font-weight: 600; font-size: .92rem;
+    text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s; }
+  .sub-menu a:hover { background: var(--bg-lila); color: var(--morado); }
+  .sub-menu a.activo { background: var(--morado); color: var(--blanco); }
+  .dropdown-vitrina { position: relative; }
+  .dropbtn .flecha { display: inline-block; font-size: .7em; margin-left: 4px; transition: transform .2s; }
+  .dropdown-vitrina.abierto .flecha, .dropdown-vitrina:hover .flecha { transform: rotate(180deg); }
+  .dropdown-content { position: absolute; top: 100%; left: 50%; transform: translate(-50%, 6px); padding-top: 8px; min-width: 220px;
+    opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s; z-index: 101; }
+  .dd-caja { background: var(--blanco); border: 1px solid var(--bg-lila); border-radius: 16px; padding: 8px; box-shadow: 0 14px 34px rgba(128, 21, 147, .18); }
+  .dd-caja a { display: block; text-align: left; padding: 9px 14px; border-radius: 10px; font-size: .88rem; font-weight: 500; color: var(--morado); }
+  .dropdown-vitrina:hover .dropdown-content, .dropdown-vitrina:focus-within .dropdown-content, .dropdown-vitrina.abierto .dropdown-content {
+    opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  @media (max-width: 760px) {
+    .sub-menu { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding-inline: 20px; }
+    .sub-menu::-webkit-scrollbar { display: none; }
+    .sub-menu a { flex: none; padding: 8px 14px; font-size: .88rem; }
+    .dropdown-vitrina, .dropdown-content, .dd-caja { display: contents; }
+    /* En móvil el menú es plano: los sub-enlaces de Vitrinas se muestran en fila (sin esto quedaban invisibles ocupando espacio) */
+    .dropdown-content { visibility: visible; opacity: 1; transition: none; }
+    .dropbtn .flecha { display: none; }
+    .dd-caja a { font-weight: 500; opacity: .85; padding: 8px 12px; }
+  }
+
+  /* ---------- Secciones de categoría ---------- */
+  .categoria-seccion { position: relative; overflow: hidden; padding-block: clamp(56px, 8vw, 104px); scroll-margin-top: calc(var(--h-top) + var(--h-sub)); }
+  /* Fondo lila que se funde con el azul claro arriba y abajo: sin cortes entre secciones, como en la página principal */
+  .bg-lila { background: linear-gradient(180deg, var(--bg-azul) 0%, var(--bg-lila) 160px, var(--bg-lila) calc(100% - 160px), var(--bg-azul) 100%); }
+  .bg-lila.al-pie { background: linear-gradient(180deg, var(--bg-azul) 0%, var(--bg-lila) 160px); }
+  .encabezado { position: relative; display: grid; justify-items: center; text-align: center; gap: 4px; max-width: 640px; margin: 0 auto clamp(32px, 4vw, 52px); }
+  .encabezado .script { color: var(--lavanda-fuerte); }
+  .encabezado .lead { margin-top: 10px; font-size: 1.04rem; }
+  .encabezado .lead strong { font-weight: 600; }
+  .categoria-seccion .splash { width: min(560px, 70vw); opacity: .06; }
+  /* Separadas de los bordes de arriba y abajo para que no se vea un corte recto entre secciones */
+  .categoria-seccion .splash.c1 { right: -200px; top: 60px; transform: rotate(20deg); }
+  .categoria-seccion .splash.c2 { left: -210px; bottom: 60px; transform: rotate(140deg); }
+  h3[id] { scroll-margin-top: calc(var(--h-top) + var(--h-sub) + 14px); }
+  .subtitulo { display: flex; align-items: center; gap: 12px; margin: 52px 0 24px; font-size: 1.35rem; font-weight: 600; color: var(--indigo); }
+  .subtitulo:first-of-type { margin-top: 0; }
+  .subtitulo::before { content: ""; width: 26px; height: 24px; flex: none; background: var(--morado);
+    -webkit-mask: var(--splash) center / contain no-repeat; mask: var(--splash) center / contain no-repeat; }
+  .subtitulo::after { content: ""; flex: 1; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--lavanda), transparent); }
+  .grid-productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); justify-content: center; gap: clamp(20px, 2.5vw, 28px); }
+  .vacio { grid-column: 1 / -1; display: grid; justify-items: center; gap: 6px; text-align: center; padding: 28px 22px; border: 2px dashed var(--lavanda); border-radius: var(--radio); font-size: .95rem; background: rgba(255, 255, 255, .6); }
+  .vacio::before { content: ""; width: 34px; height: 32px; background: var(--lavanda);
+    -webkit-mask: var(--splash) center / contain no-repeat; mask: var(--splash) center / contain no-repeat; }
+
+  /* #SinCulpa grande sobre el splash azul, igual que la Línea Saludable de la página principal */
+  .sincul-hero { display: grid; place-items: center; width: min(440px, 88vw); aspect-ratio: 760 / 520; margin-bottom: 4px;
+    background: var(--img-splash-azul) center / contain no-repeat; }
+  .sincul-big { font-family: var(--f-script); color: var(--morado); font-size: clamp(2.8rem, 2rem + 4vw, 4.8rem); line-height: 1; transform: rotate(-4deg); white-space: nowrap; }
+
+  /* Sello "Promo del mes": se estampa al llegar a la sección y un destello lo cruza cada pocos segundos */
+  .sello-promo { position: absolute; z-index: 2; right: -150px; top: -6px;
+    width: 118px; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+    display: grid; place-content: center; justify-items: center; gap: 1px; text-align: center;
+    background: var(--indigo); color: var(--blanco);
+    box-shadow: 0 14px 26px -12px rgba(30, 20, 90, .6), inset 0 0 0 5px var(--indigo), inset 0 0 0 7px rgba(255, 255, 255, .55);
+    transform: rotate(-12deg); }
+  .sello-promo small { font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1.2; }
+  .sello-promo b { font-family: var(--f-script); font-weight: 400; font-size: 1.4rem; line-height: 1; }
+  .sello-promo::after { content: ""; position: absolute; top: -25%; bottom: -25%; left: 0; width: 42%; pointer-events: none;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .6), rgba(255, 255, 255, 0));
+    transform: translateX(-170%) skewX(-20deg); animation: destello 4.5s ease-in-out 1.4s infinite; }
+  @keyframes destello { 0%, 62% { transform: translateX(-170%) skewX(-20deg); } 85%, 100% { transform: translateX(340%) skewX(-20deg); } }
+  .sello-promo.por-estampar { opacity: 0; }
+  .sello-promo.estampado { animation: estampar 2.2s both; }
+  @keyframes estampar {
+    0%   { opacity: 1; transform: translateY(-60vh) rotate(-40deg); animation-timing-function: cubic-bezier(.4, 0, .85, .5); }
+    62%  { transform: translateY(0) rotate(-8deg) scale(1.12, .86); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+    75%  { transform: translateY(-22px) rotate(-15deg) scale(.97, 1.03); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+    86%  { transform: translateY(0) rotate(-10deg) scale(1.05, .95); animation-timing-function: ease-out; }
+    94%  { transform: translateY(-6px) rotate(-12.5deg) scale(1); }
+    100% { opacity: 1; transform: translateY(0) rotate(-12deg) scale(1); }
+  }
+  @media (max-width: 1000px) { .sello-promo { position: relative; right: auto; top: auto; width: 96px; margin-bottom: 14px; } .sello-promo b { font-size: 1.2rem; } .sello-promo small { font-size: .56rem; } }
+
+  /* ---------- Tarjetas (misma tarjeta blanca y foto sobre splash blanco que "Nuestros Favoritos") ---------- */
+  .fav-card { position: relative; display: flex; flex-direction: column; background: var(--blanco); border-radius: var(--radio);
+    padding: 14px 14px 22px; box-shadow: var(--sombra); transition: transform .25s ease, box-shadow .25s ease; min-width: 0; }
+  .fav-card:hover { transform: translateY(-6px); box-shadow: var(--sombra-hover); }
+  .card-foto { position: relative; aspect-ratio: 4 / 3; margin-bottom: 18px; border-radius: 20px; overflow: hidden; display: grid; place-items: center;
+    background: linear-gradient(150deg, var(--lavanda-fuerte), var(--lila)); }
+  .card-foto.rosa { background: linear-gradient(150deg, #e9b8f2, var(--lavanda-fuerte)); }
+  .card-foto.azul { background: linear-gradient(150deg, var(--azul), var(--lavanda-fuerte)); }
+  .card-foto.cacao { background: linear-gradient(150deg, #c9a0e0, #8f3aa6); }
+  /* El "plato": splash de crema blanco, girado distinto en cada tarjeta (.v2 a .v5) */
+  .plato { position: absolute; inset: 6% 15% 13%; display: grid; place-items: center; }
+  .plato::before { content: ""; position: absolute; inset: 0; background: var(--img-splash) center / contain no-repeat;
+    filter: brightness(0) invert(1); opacity: .92; transform: rotate(var(--giro, 0deg)); transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+  .plato .emoji, .card-foto > .emoji { position: relative; font-size: clamp(3.2rem, 2.6rem + 2vw, 4.3rem); line-height: 1;
+    filter: drop-shadow(0 10px 10px rgba(60, 10, 80, .28)); transform: rotate(var(--giro-t, -4deg)); transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+  .plato img.sin-fondo { position: relative; width: 92%; height: auto; object-fit: contain; filter: drop-shadow(0 14px 14px rgba(40, 10, 60, .35)); transition: transform .5s cubic-bezier(.3, 1.4, .5, 1); }
+  .fav-card:hover .plato::before { transform: rotate(calc(var(--giro, 0deg) + 10deg)) scale(1.04); }
+  .fav-card:hover .plato .emoji, .fav-card:hover .card-foto > .emoji { transform: rotate(calc(var(--giro-t, -4deg) + 6deg)) translateY(-6px); }
+  .fav-card:hover .plato img.sin-fondo { transform: translateY(-6px); }
+  .v2 { --giro: 70deg; --giro-t: 5deg; }
+  .v3 { --giro: 160deg; --giro-t: -7deg; }
+  .v4 { --giro: -50deg; --giro-t: 3deg; }
+  .v5 { --giro: 220deg; --giro-t: -3deg; }
+  /* Foto real a todo el recuadro: <img src="foto.jpg" alt="..."> directamente dentro de .card-foto */
+  .card-foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .badge-obsequio { position: absolute; left: 10px; bottom: 10px; z-index: 2; display: inline-flex; align-items: center; gap: 5px;
+    background: var(--verde-bg); color: var(--verde-txt); border: 1px solid var(--verde-borde); font-size: .74rem; font-weight: 600;
+    padding: 4px 11px; border-radius: 999px; }
+  .promo-tag { position: absolute; left: 12px; top: 12px; z-index: 2; background: var(--indigo); color: var(--blanco);
+    font-size: .72rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: .08em; box-shadow: 0 8px 16px -8px rgba(63, 81, 181, .8); }
+  .sello-sc { position: absolute; right: 12px; top: 12px; z-index: 2; background: var(--blanco); color: var(--indigo); font-family: var(--f-script);
+    font-size: 1.25rem; line-height: 1; padding: 8px 14px 6px; border-radius: 999px; transform: rotate(-6deg); box-shadow: 0 8px 18px -10px rgba(63, 81, 181, .6); }
+  .cuerpo { display: flex; flex-direction: column; flex: 1; padding: 0 8px; }
+  .fav-card h3 { font-size: 1.2rem; }
+  .fav-card .desc { font-size: .92rem; margin: 6px 0 16px; flex-grow: 1; }
+  .desc strong { font-weight: 600; }
+
+  /* Selectores y campos */
+  select, input[type="text"], input[type="date"] { width: 100%; padding: 10px 12px; border: 1.5px solid var(--lavanda); border-radius: 12px; background-color: var(--blanco);
+    font-family: var(--f-sans); font-size: .92rem; color: var(--morado); outline: none; transition: border-color .2s, box-shadow .2s; }
+  select { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 38px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5l6 6 6-6' fill='none' stroke='%23801593' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; }
+  select:hover, input[type="text"]:hover, input[type="date"]:hover { border-color: var(--lavanda-medio); }
+  select:focus, input:focus { border-color: var(--morado); box-shadow: 0 0 0 4px rgba(147, 112, 219, .25); }
+  ::placeholder { color: rgba(128, 21, 147, .5); }
+  .opciones { background: var(--bg-azul); padding: 12px 14px 14px; border-radius: 16px; margin-bottom: 14px; display: grid; gap: 6px; }
+  .opciones[hidden] { display: none; }
+  .opciones label { font-size: .8rem; font-weight: 600; color: var(--indigo); }
+  .opciones select + label { margin-top: 8px; }
+
+  /* Caja de precios */
+  .precio-caja { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin-bottom: 16px; padding-top: 14px; border-top: 1.5px dashed var(--lavanda); }
+  .precio-etq { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--indigo); }
+  .precio-bs { display: block; font-size: 1.55rem; line-height: 1.15; font-weight: 700; color: var(--morado); transition: opacity .3s; }
+  .cargando .js-bs { opacity: .3; }
+  .p-usd { display: grid; justify-items: end; gap: 2px; }
+  .precio-usd { background: var(--bg-lila); color: var(--indigo); font-size: .84rem; font-weight: 600; padding: 3px 12px; border-radius: 999px; white-space: nowrap; }
+  .precio-usd.tachado { background: none; padding: 0; text-decoration: line-through; font-weight: 400; opacity: .6; }
+
+  /* Torta personalizada */
+  .card-personalizada { background: linear-gradient(145deg, #fff 45%, var(--bg-azul)); border: 2px solid var(--lavanda); padding: clamp(18px, 3vw, 32px); }
+  .card-personalizada:hover { transform: none; }
+  .pers-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(22px, 4vw, 44px); align-items: start; }
+  .pers-info { display: grid; gap: 14px; align-content: start; }
+  .pers-info .card-foto { aspect-ratio: 16 / 9; margin-bottom: 4px; }
+  .pers-info .plato { inset: 8% 26% 10%; }
+  .pers-info .badge-obsequio { position: static; width: fit-content; }
+  .pers-info h3 { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem); font-weight: 700; color: var(--indigo); }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: .94rem; }
+  .checks li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+  .checks li::before { content: ""; width: 20px; height: 18px; margin-top: 4px; background: var(--morado);
+    -webkit-mask: var(--splash) center / contain no-repeat; mask: var(--splash) center / contain no-repeat; }
+  .checks strong { font-weight: 600; }
+  .modalidad { border: 0; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+  .modalidad legend { font-weight: 600; font-size: .9rem; color: var(--indigo); padding: 0; margin-bottom: 8px; }
+  .tile { position: relative; display: block; cursor: pointer; }
+  .tile input { position: absolute; opacity: 0; inset: 0; }
+  .tile span { display: block; padding: 12px 14px 12px 44px; border: 2px solid var(--lavanda); border-radius: 16px; background: var(--blanco); font-size: .9rem; font-weight: 500; line-height: 1.35; transition: border-color .2s, background-color .2s, box-shadow .2s; position: relative; }
+  .tile:hover span { border-color: var(--lavanda-medio); }
+  .tile span::before { content: ""; position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; border: 2px solid var(--lavanda-medio); background: #fff; transition: all .2s; }
+  .tile input:checked + span { border-color: var(--morado); background: var(--bg-lila); box-shadow: 0 8px 20px -12px rgba(128, 21, 147, .6); }
+  .tile input:checked + span::before { background: var(--morado); border-color: var(--morado); box-shadow: inset 0 0 0 3px #fff; }
+  .tile input:focus-visible + span { outline: 3px solid var(--lila); outline-offset: 2px; }
+  @media (max-width: 860px) { .pers-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Pie (igual que la página principal: morado, logo en negativo y enlaces) ---------- */
+  .pie { position: relative; z-index: 1; background: var(--morado); color: var(--blanco); padding-block: 48px 110px; }
+  .pie .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+  .pie img { height: 72px; width: auto; }
+  .pie small { display: block; font-size: .8rem; font-weight: 400; color: var(--bg-lila); opacity: .85; margin-top: 6px; }
+  .pie nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .88rem; font-weight: 500; }
+  .pie nav a { text-decoration: none; color: var(--blanco); opacity: .9; }
+  .pie nav a:hover { opacity: 1; text-decoration: underline; }
+
+  /* ---------- Botones flotantes: Volver al inicio + WhatsApp (mismo formato que "Mi catálogo" en el inicio) ---------- */
+  .flotantes { position: fixed; z-index: 50; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 10px; }
+  .flotante { display: flex; align-items: center; justify-content: center; gap: 10px; height: 54px; padding: 0 22px; border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, .85); color: var(--blanco); text-decoration: none; white-space: nowrap;
+    font-family: var(--f-sans); font-size: .92rem; font-weight: 600; transition: transform .2s ease, box-shadow .2s ease, opacity .25s ease; }
+  .flotante:hover { transform: translateY(-2px) scale(1.03); }
+  .flotante svg { width: 24px; height: 24px; flex: none; }
+  .flotante.inicio { background: var(--indigo); box-shadow: 0 14px 30px -10px rgba(63, 81, 181, .7); }
+  .flotante.whatsapp { background: var(--morado); box-shadow: 0 14px 30px -10px rgba(128, 21, 147, .7); }
+  .flotante.whatsapp svg { fill: currentColor; }
+  body.modal-abierto .flotantes { opacity: 0; pointer-events: none; }
+  /* En el teléfono quedan como círculos para no tapar los botones de las tarjetas */
+  @media (max-width: 600px) {
+    .flotantes { right: 12px; gap: 8px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+    .flotante { width: 50px; height: 50px; padding: 0; }
+    .flotante span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .flotante svg { width: 22px; height: 22px; }
+  }
+
+  /* ---------- Ventanas emergentes ---------- */
+  .modal-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 16px;
+    background: rgba(40, 10, 60, .55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; }
+  .modal-overlay.activo { opacity: 1; visibility: visible; }
+  .modal-content { position: relative; width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; background: var(--blanco); border-radius: var(--radio);
+    padding: clamp(22px, 4vw, 34px); box-shadow: 0 24px 60px rgba(30, 5, 45, .4); transform: translateY(16px) scale(.97); transition: transform .3s cubic-bezier(.3, 1.3, .5, 1);
+    background-image: linear-gradient(180deg, var(--bg-azul), var(--blanco) 140px); }
+  .modal-overlay.activo .modal-content { transform: none; }
+  .modal-cab { position: relative; text-align: center; margin-bottom: 18px; display: grid; gap: 2px; justify-items: center; }
+  .modal-cab::before { content: ""; width: 54px; aspect-ratio: 760 / 710; margin-bottom: 4px; background: var(--img-splash) center / contain no-repeat; transform: rotate(-20deg); }
+  .modal-cab .script { font-size: 2rem; color: var(--lavanda-fuerte); }
+  .modal-cab h3 { font-size: 1.35rem; font-weight: 700; color: var(--indigo); }
+  .modal-cab p { font-size: .88rem; margin-top: 4px; }
+  .detalle-opcion { display: inline-block; margin-top: 8px; background: var(--bg-lila); color: var(--indigo); font-weight: 600; font-size: .82rem; padding: 5px 14px; border-radius: 999px; }
+  .detalle-opcion:empty { display: none; }
+  .cerrar-modal { position: absolute; top: 14px; right: 14px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--bg-lila); color: var(--morado);
+    font-size: 1.4rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: background-color .2s, transform .2s; }
+  .cerrar-modal:hover { background: var(--lavanda); transform: rotate(90deg); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .campo { display: grid; gap: 5px; align-content: start; min-width: 0; }
+  .campo.full { grid-column: 1 / -1; }
+  .campo[hidden] { display: none; }
+  .campo > label { font-size: .8rem; font-weight: 600; color: var(--indigo); }
+  .form-grid .btn { margin-top: 6px; }
+  .form-grid .btn.full { grid-column: 1 / -1; }
+  @media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 600px) { .categoria-seccion { padding-block: 56px; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .fav-card.reveal.in:hover { transform: translateY(-6px); }
+    .card-personalizada.reveal.in:hover { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; } }
+</style>
+</head>
+<body id="inicio" class="cargando">
+
+<!-- Íconos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-wa" viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.6L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.6 23 3 16 3zm0 23.3c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.4a10.3 10.3 0 1 1 9 5zm5.7-7.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24"><path d="M4 11.2 12 4.5l8 6.7M6.2 9.6V19.5h11.6V9.6M10 19.5v-5.2h4v5.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="top" id="cabecera">
+  <div class="wrap">
+    <a href="index.html" class="logo" aria-label="Dulcito Abril, ir al inicio"><img src="assets/logo.png" alt="Dulcito Abril" width="900" height="370"></a>
+    <a href="index.html" class="top-inicio"><svg aria-hidden="true"><use href="#i-arrow"/></svg>Volver al inicio</a>
+    <div class="tasa-bcv" role="status" aria-live="polite">
+      <span class="indicador js-indicador" title="Conectando con el BCV..."></span>
+      <span class="tasa-lbl">Tasa BCV:</span>
+      <strong>Bs. <span class="js-tasa-texto">...</span></strong>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-cat" aria-labelledby="titulo-catalogo">
+  <div class="hero-deco" aria-hidden="true"><span class="splash b s1"></span></div>
+  <div class="wrap">
+    <div class="hero-texto">
+      <span class="script">Elige tu favorita</span>
+      <h1 id="titulo-catalogo">Catálogo de <em>Postres</em></h1>
+      <p class="lead">Selecciona tu postre favorito, mira su precio en dólares y en bolívares, y haz tu pedido directamente por WhatsApp.</p>
+      <div class="hero-datos">
+        <span>Precios en $ y Bs. a tasa BCV</span>
+        <span>Topper sencillo de obsequio</span>
+        <span>Pick up gratis</span>
+      </div>
+      <div class="hero-acciones">
+        <a href="#vitrina" class="btn btn-hero btn-lila">Ver tortas de vitrina <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#personalizadas" class="btn btn-hero btn-borde">Crear mi torta</a>
+      </div>
+    </div>
+    <!-- Splash + torta flotando, igual que en el inicio -->
+    <div class="hero-visual" aria-hidden="true">
+      <img class="hero-splash" src="assets/splash-morado.png" alt="" width="760" height="710">
+      <img class="pastel" src="assets/torta-chocolate-sin-fondo.png" alt="" width="604" height="524">
+      <span class="sello">Precios al día</span>
+    </div>
+  </div>
+  <svg class="drip" viewBox="0 0 1440 250" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+  <defs><clipPath id="dc"><path d="M0,0 V39.2 C9.3,39.2 9.3,66.2 18.6,66.2 C28.5,66.2 33.2,104.8 37.1,117.1 C33.4,127.6 34.7,143.4 49.3,143.4 C67.7,143.4 69.4,127.6 61.5,117.1 C58.9,104.8 51.6,66.2 57.3,66.2 C79.6,66.2 79.6,67.7 102.0,67.7 C113.9,67.7 114.2,103.4 116.0,106.8 C106.0,119.7 108.0,139.1 130.5,139.1 C148.6,139.1 150.2,119.7 144.9,106.8 C144.6,103.4 141.2,67.7 148.6,67.7 C175.8,67.7 175.8,48.7 203.0,48.7 C215.7,48.7 217.6,111.0 221.0,125.5 C203.5,144.6 206.7,173.2 241.7,173.2 C266.7,173.2 269.0,144.6 262.4,125.5 C261.3,111.0 254.9,48.7 264.1,48.7 C282.4,48.7 282.4,70.9 300.7,70.9 C318.7,70.9 314.7,92.5 333.4,92.5 C354.0,92.5 350.8,70.9 372.5,70.9 C392.2,70.9 392.2,44.5 411.8,44.5 C430.2,44.5 429.4,102.9 431.4,112.3 C419.0,131.9 421.9,161.3 453.9,161.3 C483.6,161.3 486.3,131.9 476.4,112.3 C476.8,102.9 472.9,44.5 486.6,44.5 C513.6,44.5 513.6,73.6 540.6,73.6 C562.5,73.6 558.2,96.7 586.0,96.7 C602.8,96.7 599.1,73.6 623.9,73.6 C647.9,73.6 647.9,36.1 671.9,36.1 C695.1,36.1 690.1,55.0 715.5,55.0 C743.9,55.0 739.1,36.1 764.0,36.1 C781.7,36.1 781.7,33.2 799.3,33.2 C809.6,33.2 815.7,105.5 821.4,131.2 C807.2,149.8 810.2,177.7 842.9,177.7 C868.7,177.7 871.1,149.8 864.5,131.2 C861.1,105.5 850.4,33.2 870.4,33.2 C897.9,33.2 897.9,73.1 925.4,73.1 C942.4,73.1 937.5,121.7 937.0,126.8 C920.1,144.2 923.1,170.3 956.5,170.3 C977.8,170.3 979.8,144.2 976.0,126.8 C978.5,121.7 979.4,73.1 991.7,73.1 C1013.5,73.1 1013.5,33.5 1035.3,33.5 C1045.9,33.5 1041.0,81.8 1040.5,89.8 C1027.9,105.9 1030.5,130.1 1059.9,130.1 C1081.1,130.1 1083.1,105.9 1079.3,89.8 C1081.8,81.8 1082.6,33.5 1095.8,33.5 C1114.4,33.5 1114.4,51.0 1133.1,51.0 C1157.5,51.0 1152.7,67.5 1179.7,67.5 C1205.0,67.5 1200.3,51.0 1225.0,51.0 C1238.9,51.0 1238.9,40.5 1252.9,40.5 C1263.3,40.5 1262.3,76.9 1263.3,77.7 C1253.6,91.9 1255.7,113.3 1278.3,113.3 C1300.4,113.3 1302.5,91.9 1293.2,77.7 C1293.7,76.9 1291.5,40.5 1304.6,40.5 C1326.9,40.5 1326.9,28.9 1349.2,28.9 C1356.9,28.9 1358.5,90.9 1361.3,112.5 C1351.8,128.6 1354.0,152.9 1379.1,152.9 C1404.9,152.9 1407.2,128.6 1396.9,112.5 C1396.0,90.9 1390.6,28.9 1405.0,28.9 C1422.5,28.9 1422.5,59.0 1440.0,59.0 V0 Z"/></clipPath></defs>
+  <path d="M0,0 V39.2 C9.3,39.2 9.3,66.2 18.6,66.2 C28.5,66.2 33.2,104.8 37.1,117.1 C33.4,127.6 34.7,143.4 49.3,143.4 C67.7,143.4 69.4,127.6 61.5,117.1 C58.9,104.8 51.6,66.2 57.3,66.2 C79.6,66.2 79.6,67.7 102.0,67.7 C113.9,67.7 114.2,103.4 116.0,106.8 C106.0,119.7 108.0,139.1 130.5,139.1 C148.6,139.1 150.2,119.7 144.9,106.8 C144.6,103.4 141.2,67.7 148.6,67.7 C175.8,67.7 175.8,48.7 203.0,48.7 C215.7,48.7 217.6,111.0 221.0,125.5 C203.5,144.6 206.7,173.2 241.7,173.2 C266.7,173.2 269.0,144.6 262.4,125.5 C261.3,111.0 254.9,48.7 264.1,48.7 C282.4,48.7 282.4,70.9 300.7,70.9 C318.7,70.9 314.7,92.5 333.4,92.5 C354.0,92.5 350.8,70.9 372.5,70.9 C392.2,70.9 392.2,44.5 411.8,44.5 C430.2,44.5 429.4,102.9 431.4,112.3 C419.0,131.9 421.9,161.3 453.9,161.3 C483.6,161.3 486.3,131.9 476.4,112.3 C476.8,102.9 472.9,44.5 486.6,44.5 C513.6,44.5 513.6,73.6 540.6,73.6 C562.5,73.6 558.2,96.7 586.0,96.7 C602.8,96.7 599.1,73.6 623.9,73.6 C647.9,73.6 647.9,36.1 671.9,36.1 C695.1,36.1 690.1,55.0 715.5,55.0 C743.9,55.0 739.1,36.1 764.0,36.1 C781.7,36.1 781.7,33.2 799.3,33.2 C809.6,33.2 815.7,105.5 821.4,131.2 C807.2,149.8 810.2,177.7 842.9,177.7 C868.7,177.7 871.1,149.8 864.5,131.2 C861.1,105.5 850.4,33.2 870.4,33.2 C897.9,33.2 897.9,73.1 925.4,73.1 C942.4,73.1 937.5,121.7 937.0,126.8 C920.1,144.2 923.1,170.3 956.5,170.3 C977.8,170.3 979.8,144.2 976.0,126.8 C978.5,121.7 979.4,73.1 991.7,73.1 C1013.5,73.1 1013.5,33.5 1035.3,33.5 C1045.9,33.5 1041.0,81.8 1040.5,89.8 C1027.9,105.9 1030.5,130.1 1059.9,130.1 C1081.1,130.1 1083.1,105.9 1079.3,89.8 C1081.8,81.8 1082.6,33.5 1095.8,33.5 C1114.4,33.5 1114.4,51.0 1133.1,51.0 C1157.5,51.0 1152.7,67.5 1179.7,67.5 C1205.0,67.5 1200.3,51.0 1225.0,51.0 C1238.9,51.0 1238.9,40.5 1252.9,40.5 C1263.3,40.5 1262.3,76.9 1263.3,77.7 C1253.6,91.9 1255.7,113.3 1278.3,113.3 C1300.4,113.3 1302.5,91.9 1293.2,77.7 C1293.7,76.9 1291.5,40.5 1304.6,40.5 C1326.9,40.5 1326.9,28.9 1349.2,28.9 C1356.9,28.9 1358.5,90.9 1361.3,112.5 C1351.8,128.6 1354.0,152.9 1379.1,152.9 C1404.9,152.9 1407.2,128.6 1396.9,112.5 C1396.0,90.9 1390.6,28.9 1405.0,28.9 C1422.5,28.9 1422.5,59.0 1440.0,59.0 V0 Z" fill="#801593"/>
+  <g clip-path="url(#dc)">
+    <path d="M0,39.2 C9.3,39.2 9.3,66.2 18.6,66.2 C28.5,66.2 33.2,104.8 37.1,117.1 C33.4,127.6 34.7,143.4 49.3,143.4 C67.7,143.4 69.4,127.6 61.5,117.1 C58.9,104.8 51.6,66.2 57.3,66.2 C79.6,66.2 79.6,67.7 102.0,67.7 C113.9,67.7 114.2,103.4 116.0,106.8 C106.0,119.7 108.0,139.1 130.5,139.1 C148.6,139.1 150.2,119.7 144.9,106.8 C144.6,103.4 141.2,67.7 148.6,67.7 C175.8,67.7 175.8,48.7 203.0,48.7 C215.7,48.7 217.6,111.0 221.0,125.5 C203.5,144.6 206.7,173.2 241.7,173.2 C266.7,173.2 269.0,144.6 262.4,125.5 C261.3,111.0 254.9,48.7 264.1,48.7 C282.4,48.7 282.4,70.9 300.7,70.9 C318.7,70.9 314.7,92.5 333.4,92.5 C354.0,92.5 350.8,70.9 372.5,70.9 C392.2,70.9 392.2,44.5 411.8,44.5 C430.2,44.5 429.4,102.9 431.4,112.3 C419.0,131.9 421.9,161.3 453.9,161.3 C483.6,161.3 486.3,131.9 476.4,112.3 C476.8,102.9 472.9,44.5 486.6,44.5 C513.6,44.5 513.6,73.6 540.6,73.6 C562.5,73.6 558.2,96.7 586.0,96.7 C602.8,96.7 599.1,73.6 623.9,73.6 C647.9,73.6 647.9,36.1 671.9,36.1 C695.1,36.1 690.1,55.0 715.5,55.0 C743.9,55.0 739.1,36.1 764.0,36.1 C781.7,36.1 781.7,33.2 799.3,33.2 C809.6,33.2 815.7,105.5 821.4,131.2 C807.2,149.8 810.2,177.7 842.9,177.7 C868.7,177.7 871.1,149.8 864.5,131.2 C861.1,105.5 850.4,33.2 870.4,33.2 C897.9,33.2 897.9,73.1 925.4,73.1 C942.4,73.1 937.5,121.7 937.0,126.8 C920.1,144.2 923.1,170.3 956.5,170.3 C977.8,170.3 979.8,144.2 976.0,126.8 C978.5,121.7 979.4,73.1 991.7,73.1 C1013.5,73.1 1013.5,33.5 1035.3,33.5 C1045.9,33.5 1041.0,81.8 1040.5,89.8 C1027.9,105.9 1030.5,130.1 1059.9,130.1 C1081.1,130.1 1083.1,105.9 1079.3,89.8 C1081.8,81.8 1082.6,33.5 1095.8,33.5 C1114.4,33.5 1114.4,51.0 1133.1,51.0 C1157.5,51.0 1152.7,67.5 1179.7,67.5 C1205.0,67.5 1200.3,51.0 1225.0,51.0 C1238.9,51.0 1238.9,40.5 1252.9,40.5 C1263.3,40.5 1262.3,76.9 1263.3,77.7 C1253.6,91.9 1255.7,113.3 1278.3,113.3 C1300.4,113.3 1302.5,91.9 1293.2,77.7 C1293.7,76.9 1291.5,40.5 1304.6,40.5 C1326.9,40.5 1326.9,28.9 1349.2,28.9 C1356.9,28.9 1358.5,90.9 1361.3,112.5 C1351.8,128.6 1354.0,152.9 1379.1,152.9 C1404.9,152.9 1407.2,128.6 1396.9,112.5 C1396.0,90.9 1390.6,28.9 1405.0,28.9 C1422.5,28.9 1422.5,59.0 1440.0,59.0 " fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M47.8,80.19851594063007 C52.4,100.9 61.0,117.1 59.6,130.6" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="9.0" stroke-linecap="round"/><path d="M136.6,81.66617474287824 C138.1,99.8 142.0,106.8 140.7,123.4" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="10.6" stroke-linecap="round"/><path d="M248.4,62.69195625594241 C251.6,104.7 257.6,125.5 255.8,150.1" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="15.3" stroke-linecap="round"/><path d="M465.8,58.521580424555324 C466.9,97.1 472.8,112.3 470.6,137.5" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="16.6" stroke-linecap="round"/><path d="M843.6,47.23673797373486 C850.1,98.3 859.3,131.2 857.4,155.1" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="15.9" stroke-linecap="round"/><path d="M973.2,87.0705163284803 C971.0,116.8 970.0,126.8 968.5,149.2" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="14.4" stroke-linecap="round"/><path d="M1076.5,47.497551568651105 C1074.3,77.0 1073.4,89.8 1071.9,110.5" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="14.3" stroke-linecap="round"/><path d="M1286.8,54.45216933635917 C1287.3,73.2 1292.4,77.7 1290.8,96.0" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="11.0" stroke-linecap="round"/><path d="M1385.0,42.88386451013071 C1387.7,84.7 1395.5,112.5 1393.6,133.2" fill="none" stroke="#3d0649" stroke-opacity=".30" stroke-width="13.1" stroke-linecap="round"/>
+    <path d="M34.3,84.19851594063007 C38.9,100.9 41.3,111.1 42.0,125.4" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="4.1" stroke-linecap="round"/><path d="M120.7,85.66617474287824 C122.2,99.8 118.2,100.8 119.2,117.0" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="4.9" stroke-linecap="round"/><path d="M225.5,66.69195625594242 C228.7,104.7 222.6,119.5 224.2,140.5" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="7.0" stroke-linecap="round"/><path d="M440.9,62.521580424555324 C442.1,97.1 436.5,106.3 437.9,127.7" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="7.6" stroke-linecap="round"/><path d="M819.8,51.23673797373486 C826.2,98.3 825.0,125.2 826.5,145.8" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="7.3" stroke-linecap="round"/><path d="M951.7,91.0705163284803 C949.4,116.8 938.3,120.8 939.8,140.5" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="6.6" stroke-linecap="round"/><path d="M1055.1,51.497551568651105 C1052.9,77.0 1043.9,83.8 1045.2,102.5" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="6.5" stroke-linecap="round"/><path d="M1270.3,58.45216933635917 C1270.8,73.2 1265.9,71.7 1267.0,88.8" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="5.0" stroke-linecap="round"/><path d="M1365.3,46.88386451013071 C1368.0,84.7 1365.4,106.5 1366.6,125.2" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="6.0" stroke-linecap="round"/>
+    <ellipse cx="43.7" cy="130.6" rx="3.1" ry="2.3" fill="#fff" fill-opacity=".62" transform="rotate(-18 43.7 130.6)"/><ellipse cx="121.9" cy="123.4" rx="3.6" ry="2.7" fill="#fff" fill-opacity=".62" transform="rotate(-18 121.9 123.4)"/><ellipse cx="228.3" cy="150.1" rx="5.2" ry="3.8" fill="#fff" fill-opacity=".62" transform="rotate(-18 228.3 150.1)"/><ellipse cx="441.7" cy="137.5" rx="5.7" ry="4.2" fill="#fff" fill-opacity=".62" transform="rotate(-18 441.7 137.5)"/><ellipse cx="830.4" cy="155.1" rx="5.4" ry="4.0" fill="#fff" fill-opacity=".62" transform="rotate(-18 830.4 155.1)"/><ellipse cx="943.7" cy="149.2" rx="4.9" ry="3.6" fill="#fff" fill-opacity=".62" transform="rotate(-18 943.7 149.2)"/><ellipse cx="1048.7" cy="110.5" rx="4.9" ry="3.6" fill="#fff" fill-opacity=".62" transform="rotate(-18 1048.7 110.5)"/><ellipse cx="1269.6" cy="96.0" rx="3.8" ry="2.8" fill="#fff" fill-opacity=".62" transform="rotate(-18 1269.6 96.0)"/><ellipse cx="1369.5" cy="133.2" rx="4.5" ry="3.3" fill="#fff" fill-opacity=".62" transform="rotate(-18 1369.5 133.2)"/>
+  </g>
+</svg>
+</section>
+
+<!-- INFORMACIÓN DE INTERÉS -->
+<section class="info" aria-labelledby="titulo-info">
+  <div class="wrap">
+    <div class="info-caja">
+      <div class="info-cab">
+        <span class="script">Antes de pedir</span>
+        <h2 id="titulo-info">Información de interés</h2>
+      </div>
+      <div class="info-grid">
+        <div class="tiles">
+          <div class="tile-info">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span>
+            <div>
+              <h3>¿Con cuántos días de anticipación pido?</h3>
+              <p>Tu pedido tiene que realizarse al menos con <strong>3 días de anticipación</strong>, con un abono del 50% para confirmación.</p>
+            </div>
+          </div>
+          <div class="tile-info">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-2-4-6-3-5 0 .5 1.5 3 1 5 0zM12 8c2-4 6-3 5 0-.5 1.5-3 1-5 0z"/></svg></span>
+            <div>
+              <h3>Obsequio incluido</h3>
+              <p>Todas las tortas incluyen de regalo un <strong>topper sencillo de 2 capas</strong>. Los toppers temáticos más elaborados o la presentación de regalo se cotizan por separado.</p>
+            </div>
+          </div>
+          <div class="tile-info">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <div>
+              <h3>Delivery y Pick up</h3>
+              <p>Para los delivery consulta vía WhatsApp. <strong>Pick up gratis</strong> en:</p>
+              <ul class="puntos">
+                <li>La Candelaria (frente al Sambil La Candelaria)</li>
+                <li>Estación del metro La Previsora</li>
+                <li>Los Dos Caminos</li>
+                <li>Bomba de gasolina El Llanito</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="guia">
+          <h3>Guía de Tamaños de Tortas</h3>
+          <ul class="tamanos">
+            <li style="--d:18"><span class="disco-slot"><span class="disco"></span></span><div><strong>12 a 14 porciones</strong><small>18 cm diámetro x 7 cm alto</small></div></li>
+            <li style="--d:20"><span class="disco-slot"><span class="disco"></span></span><div><strong>16 a 18 porciones</strong><small>20 cm diámetro x 7 cm alto</small></div></li>
+            <li style="--d:24"><span class="disco-slot"><span class="disco"></span></span><div><strong>25 a 28 porciones</strong><small>24 cm diámetro x 7 cm alto</small></div></li>
+            <li style="--d:26"><span class="disco-slot"><span class="disco"></span></span><div><strong>30 a 32 porciones</strong><small>26 cm diámetro x 7 cm alto</small></div></li>
+          </ul>
+          <span class="tamanos-nota">*Aproximado, bajo la recomendación de una porción de torta de 100 a 130 grs por persona.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ FLOTANTE -->
+<div class="sub-menu-bar" id="barra-menu">
+  <div class="wrap">
+    <nav class="sub-menu" aria-label="Categorías del catálogo">
+      <div class="dropdown-vitrina">
+        <a href="#vitrina" class="dropbtn" aria-haspopup="true" aria-expanded="false">Vitrinas<span class="flecha" aria-hidden="true">▾</span></a>
+        <div class="dropdown-content">
+          <div class="dd-caja">
+            <a href="#vitrina-frias">Tortas Frías</a>
+            <a href="#vitrina-merengue">Tortas con Merengue</a>
+            <a href="#vitrina-chocolate">Húmedas de Chocolate</a>
+            <a href="#vitrina-vainilla">Ponqué Vainilla</a>
+          </div>
+        </div>
+      </div>
+      <a href="#promos">Promo del mes</a>
+      <a href="#saludables">Saludable</a>
+      <a href="#personalizadas">Personalizada</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <!--
+    PLANTILLA DE TARJETA (copia y pega dentro de un .grid-productos; cambia id/for, nombre, descripción, emoji y opciones):
+    En <option value="..."> va el precio en dólares.
+    Color de fondo de la foto: agrega "rosa", "azul" o "cacao" a class="card-foto". Giro del splash: agrega "v2", "v3", "v4" o "v5" a class="plato".
+    Para usar una foto real (guárdala en la carpeta assets, con un nombre sin espacios ni tildes, y pon ese nombre en lugar de "(nombre-de-la-foto)"):
+      - Torta recortada sin fondo (PNG), sobre el splash como en la página principal: reemplaza <span class="emoji"> por <img class="sin-fondo" src="assets/(nombre-de-la-foto).png" alt="Nombre">.
+      - Foto normal a todo el recuadro: reemplaza todo <div class="plato">...</div> por <img src="assets/(nombre-de-la-foto).jpg" alt="Nombre">.
+
+    <article class="fav-card js-producto">
+      <div class="card-foto"><div class="plato"><span class="emoji" aria-hidden="true">🍰</span></div><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+      <div class="cuerpo">
+        <h3>Nombre de la torta</h3>
+        <p class="desc">Descripción corta.</p>
+        <div class="opciones">
+          <label for="sel-ejemplo">Tamaño y capas de relleno:</label>
+          <select id="sel-ejemplo" class="js-selector" data-nombre="Nombre de la torta">
+            <option value="22">18 cm - 1 Capa ($22)</option>
+          </select>
+        </div>
+        <div class="precio-caja">
+          <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+          <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">22.00</span></span></div>
+        </div>
+        <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+      </div>
+    </article>
+  -->
+
+  <!-- 1. TORTAS DE VITRINA -->
+  <section id="vitrina" class="categoria-seccion">
+    <span class="splash m c1" aria-hidden="true"></span>
+    <div class="wrap">
+      <header class="encabezado">
+        <span class="script">Nuestras tortas</span>
+        <h2>Tortas de Vitrina</h2>
+      </header>
+
+      <h3 id="vitrina-frias" class="subtitulo">Tortas Frías</h3>
+      <div class="grid-productos">
+        <article class="fav-card js-producto">
+          <div class="card-foto rosa"><div class="plato"><span class="emoji" aria-hidden="true">🍓</span></div><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Fría de Fresa</h3>
+            <p class="desc">Bizcocho liviano. Relleno de crema pastelera y fresas. Cubierto de chantilly y mermelada de fresa artesanal.</p>
+            <div class="opciones">
+              <label for="sel-fresa">Tamaño y capas de relleno (Chantilly):</label>
+              <select id="sel-fresa" class="js-selector" data-nombre="Torta Fría de Fresa">
+                <option value="22">18 cm - 1 Capa ($22)</option>
+                <option value="26">18 cm - 2 Capas ($26)</option>
+                <option value="30">20 cm - 1 Capa ($30)</option>
+                <option value="35">20 cm - 2 Capas ($35)</option>
+                <option value="33">24 cm - 1 Capa ($33)</option>
+                <option value="37">24 cm - 2 Capas ($37)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">22.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+
+        <article class="fav-card js-producto">
+          <div class="card-foto azul"><div class="plato v2"><span class="emoji" aria-hidden="true">🍋</span></div><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Fría de Limón</h3>
+            <p class="desc">Bizcocho liviano. Relleno con curd de limón. Cubierto con chantilly. Decorado con ralladura de limón.</p>
+            <div class="opciones">
+              <label for="sel-limon">Tamaño (Chantilly):</label>
+              <select id="sel-limon" class="js-selector" data-nombre="Torta Fría de Limón">
+                <option value="20">18 cm - 1 Capa ($20)</option>
+                <option value="27">18 cm - 2 Capas ($27)</option>
+                <option value="25">20 cm - 1 Capa ($25)</option>
+                <option value="30">20 cm - 2 Capas ($30)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">20.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+      </div>
+
+      <h3 id="vitrina-merengue" class="subtitulo">Tortas con Merengue</h3>
+      <div class="grid-productos">
+        <p class="vacio">Pronto agregaremos nuestras tortas con merengue.</p>
+        <!-- Agrega aquí tus tortas con merengue copiando la plantilla de tarjeta -->
+      </div>
+
+      <h3 id="vitrina-chocolate" class="subtitulo">Tortas Húmedas de Chocolate</h3>
+      <div class="grid-productos">
+        <article class="fav-card js-producto">
+          <div class="card-foto cacao"><div class="plato v3"><span class="emoji" aria-hidden="true">🥜</span></div><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Snickers</h3>
+            <p class="desc">Húmeda de chocolate. Relleno con caramelo salado, maní y ganache de chocolate amargo. Cubierta de ganache.</p>
+            <div class="opciones">
+              <label for="sel-snickers">Tamaño (Todas traen 2 capas):</label>
+              <select id="sel-snickers" class="js-selector" data-nombre="Torta Snickers">
+                <option value="45">18 cm ($45)</option>
+                <option value="50">20 cm ($50)</option>
+                <option value="55">24 cm ($55)</option>
+                <option value="60">26 cm ($60)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">45.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+
+        <article class="fav-card js-producto">
+          <div class="card-foto cacao"><div class="plato v4"><span class="emoji" aria-hidden="true">🍫</span></div><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Prestigio</h3>
+            <p class="desc">Torta húmeda de chocolate. Relleno con crema de coco. Cubierto con crema de chocolate.</p>
+            <div class="opciones">
+              <label for="sel-prestigio">Tamaño (Todas traen 2 capas):</label>
+              <select id="sel-prestigio" class="js-selector" data-nombre="Torta Prestigio">
+                <option value="35">18 cm ($35)</option>
+                <option value="40">20 cm ($40)</option>
+                <option value="45">24 cm ($45)</option>
+                <option value="50">26 cm ($50)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">35.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+      </div>
+
+      <h3 id="vitrina-vainilla" class="subtitulo">Tortas Ponqué Vainilla</h3>
+      <div class="grid-productos">
+        <p class="vacio">Pronto agregaremos nuestras tortas de ponqué de vainilla.</p>
+        <!-- Agrega aquí tus tortas de vainilla copiando la plantilla de tarjeta -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PROMOS DEL MES -->
+  <section id="promos" class="categoria-seccion bg-lila">
+    <span class="splash m c2" aria-hidden="true"></span>
+    <div class="wrap">
+      <header class="encabezado">
+        <span class="sello-promo" aria-hidden="true"><small>Promo</small><b>del mes</b><small>Por tiempo<br>limitado</small></span>
+        <span class="script">Antojos con descuento</span>
+        <h2>Promos del Mes</h2>
+        <p class="lead">Aprovecha estos dulces a <strong>precio especial</strong>. ¡Solo por este mes!</p>
+      </header>
+      <div class="grid-productos">
+        <article class="fav-card js-producto">
+          <div class="card-foto"><div class="plato v5"><span class="emoji" aria-hidden="true">🎂</span></div><span class="promo-tag">Oferta especial</span><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Vainilla - Arequipe</h3>
+            <p class="desc">Ponqué de vainilla. Relleno con dos capas de arequipe. Cubierta de arequipe. <br><strong>(Tamaño 20 cm x 11 cm)</strong></p>
+            <div class="opciones" hidden>
+              <select class="js-selector" data-nombre="Promo Vainilla Arequipe (20cm)" aria-label="Opción de promoción"><option value="30">Promoción</option></select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio promo</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd tachado">Ref: $35.00</span><span class="precio-usd">Ref: $<span class="js-usd">30.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir Promo por WhatsApp</button>
+          </div>
+        </article>
+
+        <article class="fav-card js-producto">
+          <div class="card-foto rosa"><div class="plato"><span class="emoji" aria-hidden="true">🥭</span></div><span class="promo-tag">Oferta especial</span><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Torta Parchita</h3>
+            <p class="desc">Bizcocho liviano de vainilla. Relleno con dos capas curd de parchita. Decorada con merengue italiano y sirope de parchita. <br><strong>(Tamaño 20 cm x 8 cm)</strong></p>
+            <div class="opciones" hidden>
+              <select class="js-selector" data-nombre="Promo Torta Parchita (20cm)" aria-label="Opción de promoción"><option value="20">Promoción</option></select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio promo</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd tachado">Ref: $25.00</span><span class="precio-usd">Ref: $<span class="js-usd">20.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir Promo por WhatsApp</button>
+          </div>
+        </article>
+
+        <article class="fav-card js-producto">
+          <div class="card-foto azul"><div class="plato v2"><span class="emoji" aria-hidden="true">☁️</span></div><span class="promo-tag">Oferta especial</span><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Beso de Ángel</h3>
+            <p class="desc">Bizcocho liviano humedecido en tres leches. Relleno de quesillo. Cubierta con chantilly. Detalles en arequipe. <br><strong>(Tamaño 20 cm x 8 cm)</strong></p>
+            <div class="opciones" hidden>
+              <select class="js-selector" data-nombre="Promo Beso de Ángel (20cm)" aria-label="Opción de promoción"><option value="30">Promoción</option></select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio promo</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd tachado">Ref: $35.00</span><span class="precio-usd">Ref: $<span class="js-usd">30.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir Promo por WhatsApp</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TORTAS SALUDABLES -->
+  <section id="saludables" class="categoria-seccion">
+    <span class="splash c1" aria-hidden="true"></span>
+    <div class="wrap">
+      <header class="encabezado">
+        <div class="sincul-hero" aria-hidden="true"><span class="sincul-big">#SinCulpa</span></div>
+        <h2>Tortas Saludables</h2>
+        <p class="lead">Darte un gusto y cuidarte. Postres <strong>sin azúcar refinada</strong> y <strong>sin harina de trigo</strong>.</p>
+      </header>
+      <div class="grid-productos">
+        <article class="fav-card js-producto">
+          <div class="card-foto azul"><div class="plato v3"><span class="emoji" aria-hidden="true">🫐</span></div><span class="sello-sc">#SinCulpa</span><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Muffins de Arándanos</h3>
+            <p class="desc">Preparados con avena y arándanos frescos, endulzados naturalmente.</p>
+            <div class="opciones">
+              <label for="sel-muffin">Presentación:</label>
+              <select id="sel-muffin" class="js-selector" data-nombre="Muffins de Arándanos Saludables">
+                <option value="12">Caja de 6 unidades ($12)</option>
+                <option value="20">Caja de 12 unidades ($20)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">12.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+
+        <article class="fav-card js-producto">
+          <div class="card-foto azul"><div class="plato v4"><span class="emoji" aria-hidden="true">🍫</span></div><span class="sello-sc">#SinCulpa</span><span class="badge-obsequio">🎁 Topper sencillo de obsequio</span></div>
+          <div class="cuerpo">
+            <h3>Brownie Saludable</h3>
+            <p class="desc">Cacao puro, sin azúcar refinada, húmedo y delicioso.</p>
+            <div class="opciones">
+              <label for="sel-brownie">Presentación:</label>
+              <select id="sel-brownie" class="js-selector" data-nombre="Brownie Saludable">
+                <option value="15">Caja de 6 porciones ($15)</option>
+                <option value="25">Torta entera 20cm ($25)</option>
+              </select>
+            </div>
+            <div class="precio-caja">
+              <div><span class="precio-etq">Precio</span><strong class="precio-bs">Bs. <span class="js-bs">---</span></strong></div>
+              <div class="p-usd"><span class="precio-usd">Ref: $<span class="js-usd">15.00</span></span></div>
+            </div>
+            <button type="button" class="btn btn-cta js-comprar"><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir por WhatsApp</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TORTA PERSONALIZADA -->
+  <section id="personalizadas" class="categoria-seccion bg-lila al-pie">
+    <span class="splash m c2" aria-hidden="true"></span>
+    <div class="wrap">
+      <header class="encabezado">
+        <span class="script">Diseñada para tu celebración</span>
+        <h2>Crea tu propia torta</h2>
+      </header>
+      <article class="fav-card card-personalizada">
+        <div class="pers-grid">
+          <div class="pers-info">
+            <div class="card-foto rosa"><div class="plato v4"><span class="emoji" aria-hidden="true">🎂</span></div><span class="sello-sc">A tu manera</span></div>
+            <span class="badge-obsequio">🎁 Topper sencillo de obsequio</span>
+            <h3>Torta Personalizada</h3>
+            <p class="desc">Personaliza tu torta al 100% o <strong>elige una de nuestras recetas de vitrina y personaliza solo su decoración</strong>.</p>
+            <ul class="checks">
+              <li><span><strong>Todas nuestras tortas incluyen de obsequio un topper sencillo (dos capas).</strong></span></li>
+              <li><span>Si deseas un <strong>topper temático más elaborado</strong> o una <strong>presentación especial para regalo</strong>, se cotiza y cobra por separado (toppers personalizados desde $6).</span></li>
+            </ul>
+          </div>
+
+          <div class="pers-form">
+            <fieldset class="modalidad">
+              <legend>¿Cómo quieres tu torta?</legend>
+              <label class="tile"><input type="radio" name="pers-modalidad" value="total" checked><span>Combinación totalmente personalizada</span></label>
+              <label class="tile"><input type="radio" name="pers-modalidad" value="vitrina"><span>Personalizar la decoración de una torta de vitrina</span></label>
+            </fieldset>
+
+            <div class="opciones" id="panel-total">
+              <label for="pers-masa-total">1. Elige tu Ponqué (masa):</label>
+              <select id="pers-masa-total">
+                <option value="Vainilla">Vainilla</option>
+                <option value="Chocolate">Chocolate</option>
+                <option value="Red Velvet">Red Velvet</option>
+                <option value="Zanahoria">Zanahoria</option>
+              </select>
+              <label for="pers-relleno-total">2. Elige tu Relleno:</label>
+              <select id="pers-relleno-total">
+                <optgroup label="Cremas">
+                  <option value="Arequipe">Arequipe</option>
+                  <option value="Cremoso de Chocolate">Cremoso de Chocolate</option>
+                  <option value="Crema de Oreo">Crema de Oreo</option>
+                  <option value="Mousse de Chocolate">Mousse de Chocolate</option>
+                  <option value="Mousse de Arequipe">Mousse de Arequipe</option>
+                  <option value="Brigadeiro Blanco">Brigadeiro Blanco</option>
+                  <option value="Brigadeiro de Nutella">Brigadeiro de Nutella</option>
+                  <option value="Frosting Queso Crema">Frosting Queso Crema</option>
+                  <option value="Crema de Pistacho">Crema de Pistacho</option>
+                  <option value="Ganache de Pistacho">Ganache de Pistacho</option>
+                </optgroup>
+                <optgroup label="Frutas">
+                  <option value="Curd de Parchita">Curd de Parchita</option>
+                  <option value="Curd de Limón">Curd de Limón</option>
+                  <option value="Mermelada de Fresa">Mermelada de Fresa</option>
+                  <option value="Confitura de Piña">Confitura de Piña</option>
+                </optgroup>
+              </select>
+              <label for="pers-cubierta-total">3. Elige tu Cubierta:</label>
+              <select id="pers-cubierta-total">
+                <option value="Buttercream">Buttercream</option>
+                <option value="Merengue Italiano">Merengue Italiano</option>
+                <option value="Chantilly">Chantilly</option>
+                <option value="Ganache">Ganache</option>
+              </select>
+            </div>
+
+            <div class="opciones" id="panel-vitrina" hidden>
+              <label for="pers-base-vitrina">1. Elige la base de vitrina:</label>
+              <select id="pers-base-vitrina">
+                <option value="Torta Fría de Fresa">Torta Fría de Fresa</option>
+                <option value="Torta Fría de Limón">Torta Fría de Limón</option>
+                <option value="Torta Snickers">Torta Snickers</option>
+                <option value="Torta Prestigio">Torta Prestigio</option>
+                <option value="Torta Choco Choco">Torta Choco Choco</option>
+                <option value="Beso de Ángel">Beso de Ángel</option>
+                <option value="Carrot Cake">Carrot Cake</option>
+              </select>
+              <label for="pers-cubierta-vitrina">2. Cobertura:</label>
+              <select id="pers-cubierta-vitrina">
+                <option value="Mantener la cobertura original">Mantener la cobertura original</option>
+                <option value="Buttercream">Cambiar a Buttercream</option>
+                <option value="Merengue Italiano">Cambiar a Merengue Italiano</option>
+                <option value="Chantilly">Cambiar a Chantilly</option>
+                <option value="Ganache">Cambiar a Ganache</option>
+              </select>
+            </div>
+
+            <button type="button" id="btn-abrir-modal" class="btn btn-personalizada">Cotizar mi torta personalizada</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <div class="marca">
+      <img src="assets/logo-negativo.png" alt="Dulcito Abril" width="900" height="370" loading="lazy">
+      <small>RIF J-504023035 · Pedidos al 0414 173 86 31</small>
+    </div>
+    <nav aria-label="Pie de página">
+      <a href="index.html">Volver al inicio</a>
+      <a href="#vitrina">Vitrinas</a>
+      <a href="#promos">Promo del mes</a>
+      <a href="#saludables">Saludable</a>
+      <a href="#personalizadas">Personalizada</a>
+      <a href="https://www.instagram.com/dulcito_abril/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@dulcito_abril" target="_blank" rel="noopener">TikTok</a>
+      <a href="#inicio">Subir ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Botones flotantes: Volver al inicio y WhatsApp (mismo formato que "Mi catálogo" en la página principal) -->
+<div class="flotantes">
+  <a class="flotante inicio" href="index.html"><svg aria-hidden="true"><use href="#i-casa"/></svg><span>Volver al inicio</span></a>
+  <a class="flotante whatsapp js-wa" href="https://wa.me/584141738631?text=%C2%A1Hola%20Dulcito%20Abril!%20Quiero%20hacer%20un%20pedido%20%F0%9F%8D%B0" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span>¿Te ayudamos a elegir?</span></a>
+</div>
+
+<!-- VENTANA: Pedido de vitrina / promos / saludables -->
+<div class="modal-overlay" id="modal-pedido-estandar" role="dialog" aria-modal="true" aria-labelledby="estandar-titulo-producto" aria-hidden="true">
+  <div class="modal-content">
+    <button type="button" class="cerrar-modal" id="btn-cerrar-modal-estandar" aria-label="Cerrar">&times;</button>
+    <div class="modal-cab">
+      <span class="script">Encargar postre</span>
+      <h3 id="estandar-titulo-producto">Postre</h3>
+      <span class="detalle-opcion" id="estandar-detalles-opcion"></span>
+    </div>
+    <form id="form-pedido-estandar" class="form-grid">
+      <div class="campo"><label for="estandar-nombre">Tu nombre</label><input type="text" id="estandar-nombre" placeholder="Ej. María Pérez" required autocomplete="name"></div>
+      <div class="campo"><label for="estandar-fecha">¿Para qué fecha lo deseas?</label><input type="date" id="estandar-fecha" required></div>
+      <div class="campo full"><label for="estandar-tipo-topper">Tipo de topper deseado</label>
+        <select id="estandar-tipo-topper">
+          <option value="Sencillo (Obsequio 2 capas)">Topper Sencillo (Obsequio de 2 capas)</option>
+          <option value="Más Elaborado / Temático (Cotizado por separado)">Topper Temático / Más elaborado (Cotizado por separado)</option>
+        </select></div>
+      <div class="campo full"><label for="estandar-topper-mensaje">Mensaje principal del topper</label>
+        <select id="estandar-topper-mensaje">
+          <option value="Feliz Cumpleaños">Feliz Cumpleaños</option>
+          <option value="Feliz Aniversario">Feliz Aniversario</option>
+          <option value="Feliz Día">Feliz Día</option>
+          <option value="Otro mensaje corto">Otro mensaje personalizado</option>
+          <option value="Sin mensaje de texto">Sin mensaje escrito</option>
+        </select></div>
+      <div class="campo full"><label for="estandar-topper-nombre">Nombre o número para el topper (opcional)</label><input type="text" id="estandar-topper-nombre" placeholder="Ej. María / Mi 30 cumpleaños"></div>
+      <div class="campo full"><label for="estandar-topper-tematica-select">Motivo temático o personaje (opcional)</label>
+        <select id="estandar-topper-tematica-select">
+          <option value="Sin motivo especifico">Sin motivo temático específico</option>
+          <option value="Con motivo especifico">Con personaje / motivo específico</option>
+        </select></div>
+      <div class="campo full" id="estandar-campo-motivo" hidden><input type="text" id="estandar-topper-tematica" placeholder="Ej. Spiderman, Rosas, Flores, Mariposas..." aria-label="Motivo o personaje"></div>
+      <div class="campo full"><label for="estandar-entrega">Lugar / método de entrega</label>
+        <select id="estandar-entrega">
+          <option value="Pick up Gratis: La Candelaria (Frente al Sambil La Candelaria)">Pick up Gratis: La Candelaria (Frente al Sambil La Candelaria)</option>
+          <option value="Pick up Gratis: Estación Metro La Previsora">Pick up Gratis: Estación Metro La Previsora</option>
+          <option value="Pick up Gratis: Los Dos Caminos">Pick up Gratis: Los Dos Caminos</option>
+          <option value="Pick up Gratis: Bomba de Gasolina El Llanito">Pick up Gratis: Bomba de Gasolina El Llanito</option>
+          <option value="Delivery (A consultar dirección vía WhatsApp)">Delivery (A consultar dirección vía WhatsApp)</option>
+        </select></div>
+      <button type="submit" class="btn btn-cta full"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar pedido a WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<!-- VENTANA: Cotización de torta personalizada -->
+<div class="modal-overlay" id="modal-cotizacion" role="dialog" aria-modal="true" aria-labelledby="cot-titulo" aria-hidden="true">
+  <div class="modal-content">
+    <button type="button" class="cerrar-modal" id="btn-cerrar-modal" aria-label="Cerrar">&times;</button>
+    <div class="modal-cab">
+      <span class="script">Casi listos</span>
+      <h3 id="cot-titulo">Cotiza tu torta</h3>
+      <p>Déjanos los detalles de tu evento para enviarte la cotización exacta.</p>
+      <span class="detalle-opcion" id="cot-resumen"></span>
+    </div>
+    <form id="form-cotizacion" class="form-grid">
+      <div class="campo"><label for="cliente-nombre">Tu nombre</label><input type="text" id="cliente-nombre" placeholder="Ej. María Pérez" required autocomplete="name"></div>
+      <div class="campo"><label for="cliente-fecha">¿Para qué fecha la necesitas?</label><input type="date" id="cliente-fecha" required></div>
+      <div class="campo full"><label for="cliente-celebracion">Tipo de celebración</label><input type="text" id="cliente-celebracion" placeholder="Ej. Cumpleaños, Boda, Aniversario..." required></div>
+      <div class="campo full"><label for="cliente-tipo-topper">Tipo de topper deseado</label>
+        <select id="cliente-tipo-topper">
+          <option value="Sencillo (Obsequio 2 capas)">Topper Sencillo (Obsequio de 2 capas)</option>
+          <option value="Más Elaborado / Temático (Cotizado por separado)">Topper Temático / Más elaborado (Cotizado por separado)</option>
+        </select></div>
+      <div class="campo full"><label for="cliente-topper-mensaje">Mensaje principal del topper</label>
+        <select id="cliente-topper-mensaje">
+          <option value="Feliz Cumpleaños">Feliz Cumpleaños</option>
+          <option value="Feliz Aniversario">Feliz Aniversario</option>
+          <option value="Feliz Día">Feliz Día</option>
+          <option value="Otro mensaje corto">Otro mensaje personalizado</option>
+          <option value="Sin mensaje de texto">Sin mensaje escrito</option>
+        </select></div>
+      <div class="campo full"><label for="cliente-topper-nombre">Nombre o número para el topper (opcional)</label><input type="text" id="cliente-topper-nombre" placeholder="Ej. María / 15 Años"></div>
+      <div class="campo full"><label for="cliente-topper-tematica-select">Motivo temático o personaje</label>
+        <select id="cliente-topper-tematica-select">
+          <option value="Sin motivo especifico">Sin motivo temático específico</option>
+          <option value="Con motivo especifico">Con personaje / motivo específico</option>
+        </select></div>
+      <div class="campo full" id="cliente-campo-motivo" hidden><input type="text" id="cliente-topper-motivo" placeholder="Ej. Spiderman, Caricatura, Flores, Elegante..." aria-label="Motivo o personaje"></div>
+      <div class="campo full"><label for="cliente-entrega">Método de entrega</label>
+        <select id="cliente-entrega">
+          <option value="Pick up Gratis: La Candelaria (Frente al Sambil La Candelaria)">Pick up Gratis: La Candelaria (Frente al Sambil La Candelaria)</option>
+          <option value="Pick up Gratis: Estación Metro La Previsora">Pick up Gratis: Estación Metro La Previsora</option>
+          <option value="Pick up Gratis: Los Dos Caminos">Pick up Gratis: Los Dos Caminos</option>
+          <option value="Pick up Gratis: Bomba de Gasolina El Llanito">Pick up Gratis: Bomba de Gasolina El Llanito</option>
+          <option value="Delivery (A consultar dirección vía WhatsApp)">Delivery (A consultar dirección vía WhatsApp)</option>
+        </select></div>
+      <button type="submit" class="btn btn-personalizada full"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar solicitud a WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- CONFIGURACIÓN ----------
+  const NUMERO_WA = "584141738631";   // WhatsApp de Dulcito Abril
+  let TASA_BCV = 45.50;               // Tasa de emergencia: se usa solo si no hay internet ni tasa guardada. Actualízala de vez en cuando.
+  const CLAVE_TASA = 'dulcito_tasa_bcv';
+  const DIAS_ANTICIPACION = 3;
+
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const fmt = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  // ---------- TASA BCV ----------
+  const indicador = $('.js-indicador');
+  const txtTasa = $('.js-tasa-texto');
+
+  async function pedirJSON(url, ms = 7000) {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), ms);
+    try {
+      const r = await fetch(url, { signal: ctl.signal, cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
+
+  const FUENTES = [
+    { url: 'https://pydolarvenezuela-api.vercel.app/api/v1/dollar/page?page=bcv',
+      leer: d => ({ precio: d && d.monitors && d.monitors.usd && d.monitors.usd.price, fecha: d && d.monitors && d.monitors.usd && d.monitors.usd.last_update }) },
+    { url: 'https://ve.dolarapi.com/v1/dolares/oficial',
+      leer: d => ({ precio: d && (d.promedio != null ? d.promedio : d.venta), fecha: d && d.fechaActualizacion }) }
+  ];
+
+  function mostrarTasa(valor, vivo, nota) {
+    TASA_BCV = valor;
+    txtTasa.textContent = fmt(valor);
+    indicador.classList.toggle('activo', vivo);
+    indicador.title = vivo ? ('Tasa BCV actualizada' + (nota ? ' · ' + nota : '')) : (nota || 'Tasa de respaldo');
+    document.body.classList.remove('cargando');
+    actualizarPrecios();
+  }
+
+  async function obtenerBCV() {
+    for (const f of FUENTES) {
+      try {
+        const { precio, fecha } = f.leer(await pedirJSON(f.url));
+        const v = parseFloat(precio);
+        if (isFinite(v) && v > 0) {
+          try { localStorage.setItem(CLAVE_TASA, JSON.stringify({ v, fecha: fecha || '', ts: Date.now() })); } catch (e) {}
+          return mostrarTasa(v, true, fecha ? String(fecha) : '');
+        }
+      } catch (e) { /* prueba la siguiente fuente */ }
+    }
+    try {
+      const g = JSON.parse(localStorage.getItem(CLAVE_TASA) || 'null');
+      if (g && g.v > 0) return mostrarTasa(g.v, false, 'Sin conexión con el BCV: se usa la última tasa guardada');
+    } catch (e) {}
+    mostrarTasa(TASA_BCV, false, 'Sin conexión con el BCV: se usa una tasa de respaldo');
+  }
+
+  // ---------- PRECIOS ----------
+  function pintarPrecio(tarjeta) {
+    const sel = $('.js-selector', tarjeta);
+    if (!sel) return;
+    const usd = parseFloat(sel.value);
+    if (!isFinite(usd)) return;
+    $('.js-usd', tarjeta).textContent = usd.toFixed(2);
+    $('.js-bs', tarjeta).textContent = fmt(usd * TASA_BCV);
+  }
+  function actualizarPrecios() { $$('.js-producto').forEach(pintarPrecio); }
+  $$('.js-selector').forEach(sel => sel.addEventListener('change', e => pintarPrecio(e.target.closest('.js-producto'))));
+
+  // ---------- VENTANAS EMERGENTES ----------
+  let ultimoFoco = null;
+  function abrirModal(m) {
+    ultimoFoco = document.activeElement;
+    m.classList.add('activo'); m.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-abierto');
+    setTimeout(() => { const f = $('input:not([type=hidden]), select', m); if (f) f.focus({ preventScroll: true }); }, 60);
+  }
+  function cerrarModal(m) {
+    m.classList.remove('activo'); m.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-abierto');
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus({ preventScroll: true });
+  }
+  $$('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) cerrarModal(m); }));
+  document.addEventListener('keydown', e => {
+    const abierto = $('.modal-overlay.activo');
+    if (!abierto) return;
+    if (e.key === 'Escape') return cerrarModal(abierto);
+    if (e.key === 'Tab') {
+      const foc = $$('button, input, select, a[href]', abierto).filter(x => !x.disabled && x.offsetParent !== null);
+      if (!foc.length) return;
+      const a = foc[0], z = foc[foc.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    }
+  });
+
+  // Fecha mínima: hoy + días de anticipación (hora local)
+  (function fechaMinima() {
+    const d = new Date(); d.setDate(d.getDate() + DIAS_ANTICIPACION);
+    const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    ['estandar-fecha', 'cliente-fecha'].forEach(id => { const el = document.getElementById(id); if (el) el.min = iso; });
+  })();
+
+  // Campo de motivo temático: solo si se elige "Con personaje / motivo específico"
+  function enlazarMotivo(selId, campoId, inputId) {
+    const sel = document.getElementById(selId), campo = document.getElementById(campoId), inp = document.getElementById(inputId);
+    const act = () => { const con = sel.value === 'Con motivo especifico'; campo.hidden = !con; inp.required = con; if (!con) inp.value = ''; };
+    sel.addEventListener('change', act); act();
+  }
+  enlazarMotivo('estandar-topper-tematica-select', 'estandar-campo-motivo', 'estandar-topper-tematica');
+  enlazarMotivo('cliente-topper-tematica-select', 'cliente-campo-motivo', 'cliente-topper-motivo');
+
+  const fechaDMA = iso => { const p = iso.split('-'); return p[2] + '-' + p[1] + '-' + p[0]; };
+  const abrirWA = texto => window.open('https://wa.me/' + NUMERO_WA + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+
+  // ---------- PEDIDO DE PRODUCTOS ESTÁNDAR ----------
+  const modalEstandar = document.getElementById('modal-pedido-estandar');
+  const formEstandar = document.getElementById('form-pedido-estandar');
+  let seleccion = { nombre: '', opcion: '', bs: '' };
+
+  $$('.js-comprar').forEach(btn => btn.addEventListener('click', () => {
+    const t = btn.closest('.js-producto');
+    const sel = $('.js-selector', t);
+    const opcion = sel ? sel.options[sel.selectedIndex].text : '';
+    const nombre = sel && sel.dataset.nombre ? sel.dataset.nombre : $('h3', t).textContent.trim();
+    const bs = $('.js-bs', t).textContent;
+    seleccion = { nombre, opcion, bs };
+    document.getElementById('estandar-titulo-producto').textContent = nombre;
+    document.getElementById('estandar-detalles-opcion').textContent = (opcion ? opcion + ' · ' : '') + 'Bs. ' + bs;
+    abrirModal(modalEstandar);
+  }));
+  document.getElementById('btn-cerrar-modal-estandar').addEventListener('click', () => cerrarModal(modalEstandar));
+
+  formEstandar.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value;
+    const motivo = (v('estandar-topper-tematica-select') === 'Con motivo especifico' && v('estandar-topper-tematica').trim())
+      ? v('estandar-topper-tematica').trim() : 'Sin motivo específico / Estándar';
+    const texto =
+`¡Hola Dulcito Abril! Mi nombre es *${v('estandar-nombre').trim()}* y quiero hacer el siguiente pedido:
+
+🎂 *${seleccion.nombre}*
+` + (seleccion.opcion ? `📐 Opción: ${seleccion.opcion}\n` : '') +
+`💵 Precio estimado: Bs. ${seleccion.bs} (Tasa BCV)
+
+✂ *Tipo de Topper:* ${v('estandar-tipo-topper')}
+💌 *Mensaje Topper:* ${v('estandar-topper-mensaje')}
+👤 *Nombre/Años:* ${v('estandar-topper-nombre').trim() || 'No especificado'}
+🎨 *Motivo/Temática:* ${motivo}
+📅 *Fecha requerida:* ${fechaDMA(v('estandar-fecha'))}
+🚗 *Entrega / Pick up:* ${v('estandar-entrega')}
+
+¿Me confirmas disponibilidad?`;
+    abrirWA(texto);
+    cerrarModal(modalEstandar);
+    formEstandar.reset();
+    enlazarMotivoReset();
+  });
+
+  // ---------- TORTA PERSONALIZADA ----------
+  const modalCot = document.getElementById('modal-cotizacion');
+  const formCot = document.getElementById('form-cotizacion');
+  const panelTotal = document.getElementById('panel-total');
+  const panelVitrina = document.getElementById('panel-vitrina');
+  const modalidad = () => ($('input[name="pers-modalidad"]:checked') || {}).value || 'total';
+
+  $$('input[name="pers-modalidad"]').forEach(r => r.addEventListener('change', () => {
+    const vit = modalidad() === 'vitrina';
+    panelVitrina.hidden = !vit;
+    panelTotal.hidden = vit;
+  }));
+
+  function resumenPersonalizada() {
+    const v = id => document.getElementById(id).value;
+    return modalidad() === 'vitrina'
+      ? { corto: v('pers-base-vitrina') + ' · ' + v('pers-cubierta-vitrina'),
+          texto: `🍰 *Base de Vitrina seleccionada:* ${v('pers-base-vitrina')}\n🎨 *Opción de Cobertura:* ${v('pers-cubierta-vitrina')}` }
+      : { corto: v('pers-masa-total') + ' · ' + v('pers-relleno-total') + ' · ' + v('pers-cubierta-total'),
+          texto: `🧁 *Ponqué (Masa):* ${v('pers-masa-total')}\n🍓 *Relleno:* ${v('pers-relleno-total')}\n🎨 *Cubierta:* ${v('pers-cubierta-total')}` };
+  }
+
+  document.getElementById('btn-abrir-modal').addEventListener('click', () => {
+    document.getElementById('cot-resumen').textContent = resumenPersonalizada().corto;
+    abrirModal(modalCot);
+  });
+  document.getElementById('btn-cerrar-modal').addEventListener('click', () => cerrarModal(modalCot));
+
+  formCot.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value;
+    const motivo = (v('cliente-topper-tematica-select') === 'Con motivo especifico' && v('cliente-topper-motivo').trim())
+      ? v('cliente-topper-motivo').trim() : 'Sin motivo específico / Estándar';
+    const texto =
+`Hola Dulcito Abril, mi nombre es *${v('cliente-nombre').trim()}*. Me gustaría cotizar una torta personalizada:
+
+📅 *Fecha requerida:* ${fechaDMA(v('cliente-fecha'))}
+🎉 *Tipo de celebración:* ${v('cliente-celebracion').trim()}
+🚗 *Entrega / Pick up:* ${v('cliente-entrega')}
+
+*Detalles del Topper:*
+✂ *Tipo de Topper:* ${v('cliente-tipo-topper')}
+💌 *Mensaje Topper:* ${v('cliente-topper-mensaje')}
+👤 *Nombre/Años:* ${v('cliente-topper-nombre').trim() || 'No especificado'}
+🎨 *Motivo/Temática:* ${motivo}
+
+*Elección de Torta:*
+${resumenPersonalizada().texto}
+
+¿Me podrían dar un presupuesto?`;
+    abrirWA(texto);
+    cerrarModal(modalCot);
+    formCot.reset();
+    enlazarMotivoReset();
+  });
+
+  // Tras reset() de un formulario, oculta de nuevo los campos de motivo
+  function enlazarMotivoReset() {
+    setTimeout(() => ['estandar-topper-tematica-select', 'cliente-topper-tematica-select'].forEach(id => document.getElementById(id).dispatchEvent(new Event('change'))), 0);
+  }
+
+  // ---------- MENÚ: desplegable, sección activa y alturas ----------
+  const drop = $('.dropdown-vitrina');
+  const dropBtn = $('.dropbtn');
+  dropBtn.addEventListener('click', e => {
+    if (window.matchMedia('(max-width: 760px)').matches) return;   // en móvil el menú es plano
+    if (!drop.classList.contains('abierto')) { e.preventDefault(); }
+    drop.classList.toggle('abierto');
+    dropBtn.setAttribute('aria-expanded', drop.classList.contains('abierto'));
+  });
+  document.addEventListener('click', e => { if (!drop.contains(e.target)) { drop.classList.remove('abierto'); dropBtn.setAttribute('aria-expanded', 'false'); } });
+  $$('.dd-caja a').forEach(a => a.addEventListener('click', () => drop.classList.remove('abierto')));
+
+  function medir() {
+    const r = document.documentElement.style;
+    r.setProperty('--h-top', $('#cabecera').offsetHeight + 'px');
+    r.setProperty('--h-sub', $('#barra-menu').offsetHeight + 'px');
+  }
+  medir(); window.addEventListener('resize', medir); window.addEventListener('load', medir);
+
+  const enlaces = $$('.sub-menu > a, .sub-menu > .dropdown-vitrina > a');
+  if ('IntersectionObserver' in window) {
+    const marcar = id => enlaces.forEach(a => a.classList.toggle('activo', a.getAttribute('href') === '#' + id));
+    const obs = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) marcar(en.target.id); }),
+      { rootMargin: '-45% 0px -50% 0px' });
+    ['vitrina', 'promos', 'saludables', 'personalizadas'].forEach(id => { const s = document.getElementById(id); if (s) obs.observe(s); });
+
+    // Aparición suave de las tarjetas (si JS falla, las tarjetas se ven igual)
+    const rev = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); } }), { threshold: .12 });
+    $$('.fav-card').forEach(c => { c.classList.add('reveal'); rev.observe(c); });
+
+    // Sello "Promo del mes": cae y se estampa al llegar a la sección (como en la página principal)
+    const sello = $('.sello-promo');
+    if (sello && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sello.classList.add('por-estampar');
+      const obsSello = new IntersectionObserver(es => es.forEach(en => {
+        if (en.isIntersecting) { sello.classList.replace('por-estampar', 'estampado'); obsSello.disconnect(); }
+      }), { threshold: .6 });
+      obsSello.observe(sello);
+    }
+  }
+
+  // Botón flotante de WhatsApp: mismo número que los pedidos
+  $$('.js-wa').forEach(a => a.href = 'https://wa.me/' + NUMERO_WA + '?text=' + encodeURIComponent('¡Hola Dulcito Abril! Quiero hacer un pedido 🍰'));
+
+  obtenerBCV();
+})();
+</script>
+</body>
+</html>
