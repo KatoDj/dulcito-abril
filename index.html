@@ -1,0 +1,1280 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dulcito Abril</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Damion&family=Poppins:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: one-page boutique. Secciones alternan los dos fondos claros de la marca;
+   el "splash" de crema es el único elemento gráfico (morado = clásica, azul = saludable). */
+:root {
+  color-scheme: light;
+  /* 60% fondos */
+  --bg-azul: #f2f9ff;
+  --bg-lila: #e3d7f4;
+  /* 30% secundarios */
+  --azul: #b6d7f2;
+  --lavanda: #ad88e6;
+  --lila: #9b72e3;
+  /* 10% acentos */
+  --morado: #801593;
+  --indigo: #3f51b5;
+  --indigo-hover: #33449f;
+  --blanco: #ffffff;
+  --linea: rgba(128, 21, 147, .14);
+  --sombra: 0 18px 40px -22px rgba(63, 81, 181, .45);
+
+  --f-sans: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-script: "Damion", "Brush Script MT", cursive;
+
+  --t-script: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
+  --t-h1: clamp(2.2rem, 1.4rem + 3.4vw, 3.9rem);
+  --t-h2: clamp(1.8rem, 1.3rem + 2vw, 2.7rem);
+  --t-h3: 1.15rem;
+  --t-body: 1rem;
+  --t-small: .85rem;
+
+  --radio: 22px;
+  --ancho: 1160px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg-azul);
+  color: var(--morado);
+  font-family: var(--f-sans);
+  font-weight: 300;
+  font-size: var(--t-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1, h2 { font-weight: 700; color: var(--indigo); line-height: 1.12; letter-spacing: -.01em; }
+h1 { font-size: var(--t-h1); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); font-weight: 500; color: var(--morado); line-height: 1.3; }
+p { margin: 0; }
+.script { font-family: var(--f-script); font-weight: 400; color: var(--morado); font-size: var(--t-script); line-height: 1.1; }
+:focus-visible { outline: 3px solid var(--lila); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-inline: 20px; }
+section { position: relative; padding-block: clamp(64px, 9vw, 112px); overflow: hidden; }
+.encabezado { display: grid; gap: 6px; max-width: 640px; }
+.encabezado p.lead { margin-top: 10px; font-size: 1.05rem; max-width: 58ch; }
+
+/* Botones */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 999px;
+  font-family: var(--f-sans); font-weight: 600; font-size: .98rem;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.btn-cta { background: var(--indigo); color: var(--blanco); box-shadow: var(--sombra); }
+.btn-cta:hover { background: var(--indigo-hover); transform: translateY(-2px); }
+.btn-ghost { color: var(--indigo); border-color: var(--indigo); background: transparent; }
+.btn-ghost:hover { background: var(--indigo); color: var(--blanco); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* Marca de agua splash */
+.agua { position: absolute; pointer-events: none; opacity: .06; z-index: 0; width: min(560px, 70vw); }
+section > .wrap { position: relative; z-index: 1; }
+
+/* Espacio de foto (reemplazar por fotos reales) */
+.foto {
+  --t1: #f6d9f5; --t2: #e3d4fb;
+  position: relative; overflow: hidden; border-radius: var(--radio);
+  background:
+    radial-gradient(120% 90% at 20% 15%, rgba(255,255,255,.75), transparent 55%),
+    linear-gradient(150deg, var(--t1), var(--t2));
+  display: grid; place-items: end start;
+  aspect-ratio: 4 / 5; max-width: 100%;
+}
+.foto .etq {
+  position: relative; margin: 14px; display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px 6px 10px; border-radius: 999px;
+  background: rgba(255,255,255,.82); color: var(--morado);
+  font-size: .74rem; font-weight: 500; letter-spacing: .02em;
+}
+.foto .etq svg { width: 15px; height: 15px; }
+.t-rosa { --t1: #fbd8ec; --t2: #eadcfb; }
+.t-lila { --t1: #e6d6fb; --t2: #f6e4f7; }
+.t-cacao { --t1: #ecd9e6; --t2: #d9c6f2; }
+.t-azul { --t1: #d8ebfb; --t2: #e8e0fb; }
+.t-menta { --t1: #dff1f6; --t2: #d3e4fa; }
+.t-cielo { --t1: #ffffff; --t2: #e6f1fc; }
+.t-nube { --t1: #ffffff; --t2: #e3d7f4; }
+
+/* Splash de crema + producto (morado = línea clásica, .azul = línea saludable) */
+.plato { position: relative; display: grid; place-items: center; aspect-ratio: 760 / 710; max-width: 100%; container-type: size; }
+.plato::before {
+  content: ""; position: absolute; inset: 0;
+  background: url("assets/splash-morado.png") center / contain no-repeat;
+  transform: rotate(var(--giro, 0deg));
+  transition: transform .5s cubic-bezier(.3, 1.4, .5, 1);
+}
+.plato.azul::before { background-image: url("assets/splash-azul.png"); }
+/* La foto va en círculo, como un plato, sobre el splash de color */
+.plato img {
+  position: relative; width: min(64cqw, 70cqh); height: auto; aspect-ratio: 1;
+  object-fit: cover; border-radius: 50%;
+  border: 5px solid var(--blanco);
+  box-shadow: 0 18px 30px -16px rgba(40, 10, 60, .5);
+  transform: rotate(var(--giro-t, -3deg)) scaleX(var(--espejo, 1));
+  transition: transform .5s cubic-bezier(.3, 1.4, .5, 1);
+}
+.foto > .plato { position: absolute; inset: 8% 7% 10%; aspect-ratio: auto; }
+.producto:hover .plato::before, .item:hover .plato::before, .receta:hover .plato::before { transform: rotate(calc(var(--giro, 0deg) + 10deg)) scale(1.04); }
+.producto:hover .plato img, .item:hover .plato img, .receta:hover .plato img { transform: rotate(calc(var(--giro-t, -3deg) + 4deg)) scaleX(var(--espejo, 1)) translateY(-6px); }
+.v2 { --giro: 70deg; --giro-t: 4deg; --espejo: -1; }
+.v3 { --giro: 160deg; --giro-t: -6deg; }
+.v4 { --giro: -50deg; --giro-t: 2deg; --espejo: -1; }
+.v5 { --giro: 220deg; --giro-t: -2deg; }
+.v6 { --giro: 120deg; --giro-t: 5deg; --espejo: -1; }
+/* Torta recortada (PNG sin fondo) sobre el splash: sin círculo ni borde */
+.plato img.sin-fondo {
+  width: min(72cqw, 86cqh); aspect-ratio: auto; height: auto;
+  object-fit: contain; border: 0; border-radius: 0; box-shadow: none;
+  filter: drop-shadow(0 14px 14px rgba(40, 10, 60, .35));
+  transform: none;
+}
+.producto:hover .plato img.sin-fondo { transform: translateY(-6px); }
+.sello-sc {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  background: var(--blanco); color: var(--indigo);
+  font-family: var(--f-script); font-size: 1.25rem; line-height: 1;
+  padding: 8px 14px 6px; border-radius: 999px; transform: rotate(-6deg);
+  box-shadow: 0 8px 18px -10px rgba(63, 81, 181, .6);
+}
+
+/* ---------- Header ---------- */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: rgba(242, 249, 255, .88);
+  backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--linea);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 10px; }
+.top .logo img { height: 50px; width: auto; }
+.top nav { display: flex; gap: 26px; font-size: .9rem; font-weight: 500; }
+.top nav a { text-decoration: none; color: var(--morado); opacity: .85; }
+.top nav a:hover { opacity: 1; color: var(--indigo); }
+.top .btn { padding: 10px 20px; font-size: .88rem; box-shadow: none; }
+/* Menú para teléfono y tablet: botón de tres rayas que despliega las secciones */
+.menu-btn {
+  display: none; width: 44px; height: 44px; flex: none; border: 0; border-radius: 12px; cursor: pointer;
+  background: transparent; color: var(--morado); place-items: center;
+}
+.menu-btn svg { width: 26px; height: 26px; }
+.menu-btn .cerrar { display: none; }
+.top.abierto .menu-btn .abrir { display: none; }
+.top.abierto .menu-btn .cerrar { display: block; }
+@media (max-width: 900px) {
+  .top .wrap { gap: 12px; }
+  .top .logo { margin-right: auto; }
+  .menu-btn { display: grid; }
+  .top nav {
+    display: none; position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; gap: 0; padding: 6px 20px 16px;
+    background: var(--bg-azul); border-bottom: 1px solid var(--linea);
+    box-shadow: 0 18px 30px -20px rgba(80, 10, 90, .35);
+  }
+  .top.abierto nav { display: flex; }
+  .top nav a { padding: 12px 2px; font-size: 1rem; border-bottom: 1px solid var(--linea); opacity: 1; }
+  .top nav a:last-child { border-bottom: 0; }
+}
+@media (max-width: 420px) {
+  .top .logo img { height: 42px; }
+  .top .btn { padding: 9px 14px; font-size: .8rem; }
+}
+
+/* ---------- 1. Hero ---------- */
+/* Fondo morado = mismo color de la cobertura; abajo termina en #801593 exacto para unirse al goteo */
+.hero {
+  background: radial-gradient(70% 90% at 85% 10%, rgba(173, 136, 230, .35), transparent 60%), linear-gradient(180deg, #8c1ea1 0%, var(--morado) 70%);
+  color: var(--bg-lila);
+  padding-block: clamp(40px, 6vw, 80px) clamp(40px, 5vw, 64px);
+}
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(28px, 5vw, 64px); }
+.hero-texto { display: grid; gap: 22px; min-width: 0; }
+.hero-texto .script { font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem); color: var(--bg-lila); }
+.hero-texto h1 { color: var(--blanco); }
+.hero-texto h1 em { font-style: normal; color: var(--lila); }
+.hero-texto p { font-size: 1.08rem; max-width: 46ch; }
+.hero .btn-cta { background: var(--lila); color: var(--blanco); box-shadow: 0 16px 30px -16px rgba(20, 0, 30, .6); }
+.hero .btn-cta:hover { background: var(--lavanda); }
+.hero .btn-ghost { color: var(--blanco); border-color: rgba(255, 255, 255, .7); }
+.hero .btn-ghost:hover { background: var(--blanco); color: var(--morado); border-color: var(--blanco); }
+.hero-acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
+.hero-datos { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 8px; font-size: var(--t-small); font-weight: 400; }
+.hero-datos span { display: inline-flex; align-items: center; gap: 8px; }
+.hero-datos span::before {
+  content: ""; width: 17px; height: 16px; flex: none; background: var(--lavanda);
+  -webkit-mask: url("assets/splash-morado.png") center / contain no-repeat;
+          mask: url("assets/splash-morado.png") center / contain no-repeat;
+}
+.hero-datos span.sano::before { background: var(--azul); }
+
+.hero-visual { position: relative; aspect-ratio: 1 / .93; max-width: 600px; width: 100%; justify-self: center; display: grid; place-items: center; }
+.hero-visual .splash { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); opacity: .93; transform: scale(1.1); }
+.hero-visual .pastel {
+  position: relative; width: 94%; height: auto;
+  filter: drop-shadow(0 26px 22px rgba(40, 10, 60, .45));
+  animation: flotar 6s ease-in-out infinite;
+}
+.hero-visual .sello {
+  position: absolute; right: 2%; bottom: 6%;
+  background: var(--indigo); color: var(--blanco);
+  font-family: var(--f-script); font-size: 1.6rem; line-height: 1;
+  padding: 14px 22px 12px; border-radius: 999px; transform: rotate(-6deg);
+  box-shadow: 0 16px 30px -14px rgba(20, 0, 30, .6);
+}
+@keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
+
+/* Separador inicio / favoritos: video de crema derretida (sin audio).
+   Con WebGL se quita el fondo rosado del video y se pasa al morado de la marca.
+   Si WebGL no está disponible (o el archivo se abre con doble clic), un filtro de color
+   tiñe el video de morado y vuelve blanco el fondo rosado, que desaparece con "multiply". */
+.goteo { position: relative; height: clamp(150px, 26vw, 430px); margin-top: -1px; background: var(--bg-azul); overflow: hidden; }
+.goteo::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 20%; z-index: 2; pointer-events: none;
+  background: linear-gradient(var(--morado), rgba(128, 21, 147, 0));
+}
+.goteo-capa, .goteo-video, .goteo-lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.goteo-capa {
+  filter: url(#goteo-tinte);
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(#000 72%, transparent);
+          mask-image: linear-gradient(#000 72%, transparent);
+}
+.goteo-video { object-fit: cover; object-position: center 30%; left: -3%; width: 106%; }
+.goteo-filtro { position: absolute; width: 0; height: 0; }
+.goteo-lienzo { display: none; filter: drop-shadow(0 6px 8px rgba(80, 10, 90, .2)); }
+.goteo.webgl .goteo-lienzo { display: block; }
+.goteo.webgl .goteo-capa { opacity: 0; filter: none; mix-blend-mode: normal; }
+/* ---------- 2. Favoritos ---------- */
+.favoritos { padding-top: clamp(32px, 5vw, 64px); }
+.favoritos .encabezado { margin-inline: auto; text-align: center; justify-items: center; }
+/* Tarjetas de favoritos: tarjeta blanca, foto sobre degradado con splash blanco */
+.fav-card {
+  background: var(--blanco); border-radius: 24px; padding: 14px 14px 26px; min-width: 0;
+  box-shadow: 0 10px 30px rgba(128, 21, 147, .08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.fav-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(128, 21, 147, .15); }
+.fav-foto {
+  position: relative; aspect-ratio: 1 / 1; margin-bottom: 20px; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(150deg, var(--lavanda), var(--lila));
+}
+.fav-foto.rosa { background: linear-gradient(150deg, #e9b8f2, var(--lavanda)); }
+.fav-foto.azul { background: linear-gradient(150deg, var(--azul), var(--lavanda)); }
+.fav-foto > .plato { position: absolute; inset: 8%; aspect-ratio: auto; }
+.plato.blanco::before { filter: brightness(0) invert(1); opacity: .92; }
+.fav-card:hover .plato::before { transform: rotate(calc(var(--giro, 0deg) + 10deg)) scale(1.04); }
+.fav-card:hover .plato img.sin-fondo { transform: translateY(-6px); }
+.fav-card h3, .fav-card p { padding: 0 12px; }
+.fav-card p { font-weight: 300; font-size: .95rem; margin-top: 6px; }
+/* Grupos dentro de Favoritos: Personalizadas y Promociones del mes */
+.fav-grupo { margin-top: 56px; }
+.fav-grupo + .fav-grupo { margin-top: 72px; }
+.fav-grupo-cab { display: grid; justify-items: center; gap: 2px; text-align: center; }
+.fav-grupo-cab h3 { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem); font-weight: 600; color: var(--indigo); }
+.fav-grupo-cab .script { font-size: 1.5rem; color: var(--lavanda); }
+.fav-grupo .grid-3 { margin-top: 28px; }
+.promo {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  background: var(--indigo); color: var(--blanco);
+  font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 999px;
+}
+@media (max-width: 900px) { .favoritos .grid-3, .promos .grid-3 { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; } }
+
+/* Personalizadas: texto a la izquierda (como Promociones) y collage a la derecha */
+.personalizadas { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: center; margin-top: 88px; }
+.favoritos .personalizadas .encabezado { margin: 0; text-align: left; justify-items: start; order: 2; }
+.favoritos .personalizadas .encabezado .script { color: var(--morado); }
+.favoritos .personalizadas .encabezado .btn { justify-self: start; margin-top: 18px; }
+.titulo-grande { font-size: var(--t-h2); font-weight: 700; color: var(--indigo); line-height: 1.12; letter-spacing: -.01em; }
+/* Frase + título en una sola línea (Personalizadas y Promociones usan el mismo estilo) */
+.personalizadas .titulo-grande, .promos .titulo-grande { white-space: nowrap; font-size: clamp(1.45rem, .8rem + 2vw, 2.4rem); }
+.personalizadas .frase-linea, .promos .frase-linea { white-space: nowrap; font-size: clamp(1.35rem, .9rem + 1.4vw, 2.1rem); color: var(--morado); }
+.personalizadas .collage { margin-top: 0; }
+.personalizadas .polaroid figcaption b { font-size: 1.35rem; }
+.personalizadas .polaroid figcaption span { font-size: .82rem; }
+@media (max-width: 900px) {
+  .personalizadas { grid-template-columns: 1fr; margin-top: 64px; }
+  .favoritos .personalizadas .encabezado { order: 0; }
+}
+/* Personalizadas: collage de fotos tipo polaroid, superpuestas y giradas */
+.collage { display: flex; justify-content: center; align-items: center; margin-top: 36px; padding-block: 24px; }
+.polaroid {
+  position: relative; margin: 0; width: 34%; max-width: 380px;
+  background: var(--blanco); padding: 14px 14px 20px; border-radius: 18px;
+  box-shadow: 0 18px 40px -16px rgba(80, 10, 90, .35);
+  transform: rotate(var(--r, 0deg)) translateY(var(--y, 0));
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.polaroid .fav-foto { margin-bottom: 14px; }
+.polaroid.izq { --r: -5deg; --y: 22px; width: 31%; margin-right: 1%; z-index: 1; }
+.polaroid.centro-c { --r: 1.5deg; --y: -12px; width: 34%; z-index: 2; }
+.polaroid.der { --r: 4deg; --y: 26px; width: 31%; margin-left: 1%; z-index: 1; }
+.polaroid:hover { --r: 0deg; z-index: 3; box-shadow: 0 26px 50px -18px rgba(80, 10, 90, .45); }
+.polaroid:hover .plato::before { transform: rotate(calc(var(--giro, 0deg) + 10deg)) scale(1.04); }
+.polaroid figcaption { display: grid; gap: 4px; text-align: center; padding-inline: 6px; }
+.polaroid figcaption b { font-family: var(--f-script); font-weight: 400; font-size: 1.6rem; line-height: 1.1; color: var(--morado); }
+.polaroid figcaption span { font-size: .9rem; font-weight: 300; }
+@media (max-width: 760px) {
+  .collage { flex-direction: column; gap: 0; padding-block: 0; }
+  .polaroid.izq, .polaroid.centro-c, .polaroid.der { width: min(80%, 300px); margin: 0; --y: 0; }
+  .polaroid.izq { --r: -4deg; align-self: flex-start; margin-left: 4%; }
+  .polaroid.centro-c { --r: 3deg; margin-block: -6px; align-self: flex-end; margin-right: 4%; }
+  .polaroid.der { --r: -3deg; align-self: flex-start; margin-left: 8%; }
+  .personalizadas .polaroid figcaption b { font-size: 1.4rem; }
+  .personalizadas .polaroid figcaption span { font-size: .85rem; }
+}
+
+/* ---------- 2b. Promociones del mes (misma estructura que Línea Saludable) ---------- */
+.promos { background: linear-gradient(180deg, var(--bg-azul) 0%, var(--bg-lila) 100%); overflow-x: clip; overflow-y: visible; }
+/* Encabezado igual que Favoritos: frase en Damion lavanda + título centrado, con aire debajo */
+.promos .promos-cab { margin-inline: auto; text-align: center; justify-items: center; margin-bottom: clamp(56px, 7vw, 96px); }
+.promos .promos-cab .script { color: var(--lavanda); }
+/* Sello de oferta sobre la torta, como etiqueta de precio */
+.sello-promo {
+  position: absolute; z-index: 2; top: 4%; left: 2%;
+  width: clamp(104px, 11vw, 136px); aspect-ratio: 1; border-radius: 50%;
+  display: grid; place-content: center; justify-items: center; gap: 1px; text-align: center;
+  background: var(--indigo); color: var(--blanco);
+  box-shadow: 0 14px 26px -12px rgba(30, 20, 90, .6), inset 0 0 0 5px var(--indigo), inset 0 0 0 7px rgba(255, 255, 255, .55);
+  transform: rotate(-12deg);
+}
+.sello-promo small { font-size: clamp(.6rem, .5rem + .25vw, .72rem); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1.2; }
+.sello-promo b { font-family: var(--f-script); font-weight: 400; font-size: clamp(1.25rem, 1rem + .8vw, 1.65rem); line-height: 1; }
+/* Animación del sello: se "estampa" al llegar a la sección y luego un destello lo cruza cada pocos segundos */
+.sello-promo { overflow: hidden; }
+.sello-promo::after {
+  content: ""; position: absolute; top: -25%; bottom: -25%; left: 0; width: 42%; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .6), rgba(255, 255, 255, 0));
+  transform: translateX(-170%) skewX(-20deg);
+  animation: destello 4.5s ease-in-out 1.4s infinite;
+}
+@keyframes destello {
+  0%, 62% { transform: translateX(-170%) skewX(-20deg); }
+  85%, 100% { transform: translateX(340%) skewX(-20deg); }
+}
+.sello-promo.por-estampar { opacity: 0; }
+.sello-promo.estampado { animation: estampar 2.2s both; }
+/* Cae desde arriba de la pantalla girando, choca sobre la torta (se aplasta un poco), rebota y se asienta */
+@keyframes estampar {
+  0%   { opacity: 1; transform: translateY(-75vh) rotate(-40deg); animation-timing-function: cubic-bezier(.4, 0, .85, .5); }
+  62%  { transform: translateY(0) rotate(-8deg) scale(1.12, .86); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  75%  { transform: translateY(-26px) rotate(-15deg) scale(.97, 1.03); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+  86%  { transform: translateY(0) rotate(-10deg) scale(1.05, .95); animation-timing-function: ease-out; }
+  94%  { transform: translateY(-6px) rotate(-12.5deg) scale(1); }
+  100% { opacity: 1; transform: translateY(0) rotate(-12deg) scale(1); }
+}
+.promos-top { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.promos .encabezado .btn { justify-self: start; margin-top: 18px; }
+/* Splash morado + torta flotando, como en el inicio */
+.promo-visual { position: relative; aspect-ratio: 1 / .93; max-width: 560px; width: 100%; justify-self: center; display: grid; place-items: center; }
+.promo-visual .splash { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scale(1.1); }
+.promo-visual .pastel {
+  position: relative; width: 94%; height: auto;
+  filter: drop-shadow(0 26px 22px rgba(40, 10, 60, .45));
+  animation: flotar 6s ease-in-out infinite;
+}
+@media (max-width: 900px) {
+  .promos-top { grid-template-columns: 1fr; }
+  .promo-visual { max-width: 440px; }
+}
+.favoritos .encabezado .script { color: var(--lavanda); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); margin-top: 48px; }
+.producto { display: grid; gap: 14px; align-content: start; }
+.producto .foto { transition: transform .35s ease, box-shadow .35s ease; }
+.producto:hover .foto { transform: translateY(-4px); box-shadow: var(--sombra); }
+.producto .linea-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.producto .tag { font-size: .72rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--lila); white-space: nowrap; }
+.producto p { font-size: .94rem; }
+.centro { display: flex; justify-content: center; margin-top: 52px; }
+
+/* ---------- 3. Saludable ---------- */
+.saludable { background: var(--bg-lila); }
+/* #SinCulpa grande sobre el splash azul (el de la marca) */
+.sincul-hero { position: relative; display: grid; place-items: center; min-height: clamp(220px, 28vw, 340px); margin-bottom: 20px; }
+/* "Nueva Línea": mismo formato que el título "Promociones del Mes" */
+.sal-titulo { text-align: center; margin-bottom: clamp(48px, 6vw, 80px); }
+/* Subtítulo con el formato de "Solo este mes" (Damion morado, una línea) */
+.sal-texto .frase-linea { white-space: nowrap; font-size: clamp(1.35rem, .9rem + 1.4vw, 2.1rem); color: var(--morado); }
+.sincul-hero .splash { position: absolute; left: 50%; top: 50%; height: 100%; width: auto; max-width: 92%; object-fit: contain; transform: translate(-50%, -50%); }
+.sincul-big { position: relative; z-index: 1; font-family: var(--f-script); color: var(--morado); font-size: clamp(3.6rem, 12vw, 9rem); line-height: 1; transform: rotate(-4deg); white-space: nowrap; }
+/* Texto + bento */
+/* Mosaico a la izquierda y texto a la derecha */
+.sal-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+.sal-texto { display: grid; justify-items: start; min-width: 0; order: 2; }
+.sal-texto .pildora { margin-bottom: 16px; }
+.sal-texto p { font-weight: 400; margin: 16px 0 30px; font-size: 1.05rem; max-width: 52ch; }
+.sal-texto strong { font-weight: 600; }
+.sal-bento { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; height: 480px; min-width: 0; }
+.sal-bento .grande { grid-row: 1 / 3; }
+.sal-foto {
+  height: 100%; border-radius: 24px; overflow: hidden; display: grid; place-items: center; text-align: center;
+  background: linear-gradient(150deg, var(--lavanda), var(--lila)); color: var(--blanco); font-weight: 500;
+}
+.sal-foto.azul { background: linear-gradient(150deg, var(--azul), var(--lavanda)); }
+.sal-foto.rosa { background: linear-gradient(150deg, #e9b8f2, var(--lavanda)); }
+.sal-foto b { display: block; font-size: 2.6rem; line-height: 1.2; }
+.sal-foto small { display: block; font-size: .8rem; font-weight: 400; opacity: .9; padding: 0 12px; }
+@media (max-width: 900px) {
+  .sal-grid { grid-template-columns: 1fr; }
+  .sal-texto { order: 0; }
+  .sal-bento { height: 380px; }
+}
+.pildora {
+  justify-self: start; display: inline-block; padding: 5px 14px; border-radius: 999px;
+  background: var(--indigo); color: var(--blanco);
+  font-size: .72rem; font-weight: 600; letter-spacing: .14em; margin-bottom: 10px;
+}
+.saludable .encabezado .btn { justify-self: start; margin-top: 18px; }
+.lead strong { font-weight: 600; }
+
+/* ---------- 4. Recetas ---------- */
+/* Empieza en el lila de Línea Saludable y pasa suave al azul claro: sin corte entre secciones */
+.recetas { background: linear-gradient(180deg, var(--bg-lila) 0%, var(--bg-azul) min(320px, 45%)); }
+.recetas .encabezado { margin-inline: auto; text-align: center; justify-items: center; margin-bottom: 56px; }
+.recetas-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 820px; margin-inline: auto; }
+.receta {
+  background: var(--blanco); border-radius: 24px; overflow: hidden; min-width: 0;
+  box-shadow: 0 10px 30px rgba(128, 21, 147, .08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.receta:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(128, 21, 147, .14); }
+.receta-foto {
+  aspect-ratio: 16 / 10; display: grid; place-items: center; text-align: center;
+  background: linear-gradient(150deg, var(--lavanda), var(--lila)); color: var(--blanco); font-weight: 500;
+}
+.receta-foto.azul { background: linear-gradient(150deg, var(--azul), var(--lavanda)); }
+.receta-foto.rosa { background: linear-gradient(150deg, #e9b8f2, var(--lavanda)); }
+.receta-foto b { display: block; font-size: 2.6rem; line-height: 1.2; }
+.receta-foto small { display: block; font-size: .8rem; font-weight: 400; opacity: .9; }
+.receta-cuerpo { padding: 22px 26px 28px; }
+.receta-cuerpo a { display: inline-block; margin-top: 10px; font-weight: 600; color: var(--indigo); text-decoration: none; transition: letter-spacing .2s ease; }
+.receta-cuerpo a:hover { letter-spacing: .04em; }
+@media (max-width: 700px) { .recetas-grid { grid-template-columns: 1fr; } }
+
+/* ---------- 5. Quién soy ---------- */
+.quien .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.retrato { position: relative; width: 100%; max-width: 500px; aspect-ratio: 760 / 710; justify-self: center; display: grid; place-items: center; }
+.retrato .marco {
+  position: relative; z-index: 1; width: 62%; aspect-ratio: 1;
+  border-radius: 50%; overflow: hidden;
+  border: 7px solid var(--blanco);
+  box-shadow: 0 24px 40px -20px rgba(40, 10, 60, .55);
+}
+.retrato .marco img { width: 100%; height: 100%; object-fit: cover; }
+.retrato::before {
+  content: ""; position: absolute; inset: -3%;
+  background: url("assets/splash-morado.png") center / contain no-repeat;
+  transform: rotate(-24deg);
+}
+.retrato-fig { margin: 0; display: grid; justify-items: center; gap: 12px; }
+.retrato-fig figcaption { font-size: .78rem; font-weight: 400; color: var(--lila); }
+.quien-texto { display: grid; gap: 18px; min-width: 0; }
+.quien-texto p { font-size: 1.02rem; max-width: 56ch; }
+.firma { font-family: var(--f-script); font-size: 2rem; color: var(--morado); margin-top: 6px; }
+.firma small { display: block; font-family: var(--f-sans); font-size: .8rem; font-weight: 400; color: var(--lila); }
+
+/* ---------- 6. Reseñas ---------- */
+/* Bordes suaves: arriba y abajo se funde con el azul claro de las secciones vecinas */
+.resenas { background: linear-gradient(180deg, var(--bg-azul) 0%, var(--bg-lila) 22%, var(--bg-lila) 78%, var(--bg-azul) 100%); }
+/* Carrusel de reseñas */
+.carrusel { position: relative; margin-top: 48px; padding-inline: 60px; }
+.car-pista {
+  display: grid; grid-auto-flow: column; gap: 24px;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  padding: 10px 4px 26px; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.car-pista::-webkit-scrollbar { display: none; }
+.car-pista .resena { scroll-snap-align: start; box-shadow: 0 10px 30px rgba(128, 21, 147, .08); }
+.car-btn {
+  position: absolute; top: calc(50% - 18px); z-index: 2; width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer;
+  border: 0; background: var(--blanco); color: var(--indigo);
+  box-shadow: 0 10px 24px -10px rgba(63, 81, 181, .55);
+  transition: transform .2s ease, background-color .2s ease, color .2s ease;
+}
+.car-btn:hover { background: var(--indigo); color: var(--blanco); transform: scale(1.06); }
+.car-btn svg { width: 20px; height: 20px; }
+.car-prev { left: 0; }
+.car-prev svg { transform: rotate(180deg); }
+.car-next { right: 0; }
+.car-puntos { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.car-puntos button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 999px; background: var(--lavanda); opacity: .45; cursor: pointer; transition: width .3s ease, opacity .3s ease; }
+.car-puntos button.activo { width: 26px; opacity: 1; background: var(--morado); }
+@media (max-width: 900px) { .car-pista { grid-auto-columns: calc((100% - 24px) / 2); } }
+/* En el celular se desliza con el dedo; las flechas se ocultan */
+@media (max-width: 600px) { .carrusel { padding-inline: 0; } .car-pista { grid-auto-columns: 86%; } .car-btn { display: none; } }
+.resenas .agua { left: -160px; bottom: -120px; }
+.resenas .encabezado { margin-inline: auto; text-align: center; justify-items: center; }
+.resenas .plato { width: 150px; margin-bottom: 4px; --giro: -20deg; }
+.aviso { margin-top: 14px; font-size: .78rem; font-weight: 400; padding: 6px 14px; border: 1px dashed var(--lavanda); border-radius: 999px; color: var(--lila); }
+.resena {
+  background: var(--blanco); border-radius: var(--radio); padding: 28px 26px;
+  display: grid; gap: 16px; align-content: start; min-width: 0;
+}
+.estrellas { display: flex; gap: 3px; color: var(--morado); }
+.estrellas svg { width: 18px; height: 18px; }
+.resena blockquote { margin: 0; font-size: 1rem; font-weight: 300; }
+.resena footer { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--linea); }
+.avatar {
+  width: 46px; height: 43px; flex: none; display: grid; place-items: center;
+  background: url("assets/splash-morado.png") center / contain no-repeat;
+  color: var(--blanco); font-weight: 600; font-size: .9rem;
+}
+.avatar.azul { background-image: url("assets/splash-azul.png"); color: var(--indigo); }
+.resena footer b { display: block; font-weight: 500; font-size: .92rem; }
+.resena footer span { font-size: .78rem; color: var(--lila); font-weight: 400; }
+
+/* ---------- 7. Comunidad ---------- */
+.comunidad .encabezado { margin-bottom: 44px; }
+.redes { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+/* Videos verticales (2 de Instagram y 2 de TikTok) */
+.clips { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.clip {
+  position: relative; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden;
+  display: grid; place-items: center; text-decoration: none;
+  background: linear-gradient(160deg, var(--lavanda), var(--lila));
+  box-shadow: 0 10px 30px rgba(128, 21, 147, .08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.clip:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+.clip.rosa { background: linear-gradient(160deg, #e9b8f2, var(--lavanda)); }
+.clip.azul { background: linear-gradient(160deg, var(--azul), var(--lavanda)); }
+.clip video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s ease; }
+.clip.con-video video { opacity: 1; }
+.clip.con-video .clip-ph { display: none; }
+.clip.reproduciendo .play { opacity: 0; }
+.clip-ph { position: relative; display: grid; justify-items: center; gap: 8px; color: var(--blanco); font-weight: 500; text-align: center; padding: 0 10px; }
+.clip-ph svg { width: 34px; height: 34px; }
+.clip-ph small { font-size: .8rem; }
+.clip .play { transition: opacity .3s ease; }
+@media (max-width: 900px) { .redes { grid-template-columns: 1fr; } }
+.red { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.red-cab { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.red-cab b { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: var(--indigo); }
+.red-cab b svg { width: 22px; height: 22px; }
+.red-cab a { font-size: .86rem; font-weight: 500; color: var(--morado); }
+.play { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.9); display: grid; place-items: center; color: var(--morado); }
+.play svg { width: 22px; height: 22px; margin-left: 3px; }
+
+/* ---------- Footer ---------- */
+/* Pie de página morado: logo y textos en claro para que se lean */
+.pie { background: var(--morado); color: var(--blanco); padding-block: 48px 110px; }
+.pie .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+.pie img { height: 72px; width: auto; }
+.pie .marca { position: relative; }
+.pie nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .88rem; font-weight: 500; }
+.pie nav a { text-decoration: none; color: var(--blanco); opacity: .9; }
+.pie nav a:hover { opacity: 1; text-decoration: underline; }
+.pie small { display: block; font-size: .8rem; font-weight: 400; color: var(--bg-lila); opacity: .85; margin-top: 6px; }
+
+/* ---------- Botones flotantes: Mi catálogo + WhatsApp (mismo tamaño) ---------- */
+.flotantes {
+  position: fixed; z-index: 50;
+  right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  display: grid; gap: 10px; /* columna única: los dos botones toman el ancho del más ancho */
+}
+.flotante {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  height: 54px; padding: 0 22px; border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, .85); /* se distinguen sobre cualquier fondo, incluso el morado */
+  color: var(--blanco); text-decoration: none; white-space: nowrap;
+  font-family: var(--f-sans); font-size: .92rem; font-weight: 600;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.flotante:hover { transform: translateY(-2px) scale(1.03); }
+.flotante svg { width: 24px; height: 24px; flex: none; }
+.flotante.catalogo { background: var(--indigo); box-shadow: 0 14px 30px -10px rgba(63, 81, 181, .7); }
+.flotante.whatsapp { background: var(--morado); box-shadow: 0 14px 30px -10px rgba(128, 21, 147, .7); }
+@media (max-width: 480px) {
+  .flotantes { right: 12px; gap: 8px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .flotante { height: 42px; padding: 0 14px; gap: 8px; font-size: .78rem; }
+  .flotante svg { width: 18px; height: 18px; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero .wrap, .quien .wrap, .redes { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 440px; }
+  .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .retrato { max-width: 400px; }
+}
+@media (max-width: 600px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-3 .foto { aspect-ratio: 4 / 3.4; }
+  /* Botones: más compactos para que los textos largos quepan en una línea */
+  .btn { padding: 13px 20px; font-size: .9rem; gap: 8px; }
+  /* Quién soy: el splash de la foto más pequeño */
+  .retrato { max-width: 260px; }
+  section { padding-block: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.3" r="3.4"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15l12.5-7.5z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5v11.3a3.7 3.7 0 1 1-3.7-3.7"/><path d="M14 3.5c.6 2.7 2.4 4.2 5 4.4"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.2-4.1a8.4 8.4 0 1 1 3.1 3z"/><path d="M9.1 7.9c-.6.2-1 .8-.9 1.5.4 2.8 2.6 5 5.4 5.4.7.1 1.3-.3 1.5-.9l.3-.8-2-1-.9.8a4.6 4.6 0 0 1-2.4-2.4l.8-.9-1-2z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Dulcito Abril, inicio"><img src="assets/logo.png" alt="Dulcito Abril" width="900" height="370"></a>
+    <nav aria-label="Secciones" id="menu-secciones">
+      <a href="#favoritos">Favoritos</a>
+      <a href="#promociones">Promociones</a>
+      <a href="#saludable">Saludable</a>
+      <a href="#recetas">Recetas</a>
+      <a href="#quien-soy">Quién soy</a>
+      <a href="#resenas">Reseñas</a>
+    </nav>
+    <a class="btn btn-cta js-wa" href="https://wa.me/" target="_blank" rel="noopener">Haz tu pedido</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-secciones">
+      <svg class="abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="cerrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- 1. HERO -->
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div class="hero-texto">
+        <span class="script">Repostería artesanal</span>
+        <h1>Postres que convierten <em>momentos en recuerdos</em></h1>
+        <p>Tortas, postres clásicos y una nueva línea saludable, preparados por encargo con ingredientes de primera calidad y mucho cariño.</p>
+        <div class="hero-acciones">
+          <a class="btn btn-cta" href="#favoritos">Explorar el menú <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <img class="splash" src="assets/splash-morado.png" alt="" width="760" height="710">
+        <img class="pastel" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas de Dulcito Abril" width="604" height="524">
+      </div>
+    </div>
+  </section>
+  <!-- Separador: crema derretida (video sin audio) -->
+  <div class="goteo" aria-hidden="true">
+    <div class="goteo-capa">
+      <video class="goteo-video" src="assets/goteo-crema.mp4" muted playsinline preload="auto"></video>
+    </div>
+    <canvas class="goteo-lienzo"></canvas>
+    <svg class="goteo-filtro" focusable="false">
+      <filter id="goteo-tinte" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values=".2977 .5844 .1135 0 .1632  .5259 1.0324 .2005 0 -.5165  .2575 .5055 .0982 0 .2829  0 0 0 1 0"/>
+      </filter>
+    </svg>
+  </div>
+
+  <!-- 2. FAVORITOS -->
+  <section class="favoritos" id="favoritos">
+    <div class="wrap">
+      <div class="encabezado">
+        <span class="script">Los clásicos inolvidables</span>
+        <h2>Nuestros Favoritos</h2>
+      </div>
+      <!-- Grupo 1: favoritos -->
+      <div class="fav-grupo">
+        <div class="grid-3">
+          <article class="fav-card">
+            <div class="fav-foto"><div class="plato blanco"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <h3>Torta de Chocolate entera</h3>
+            <p>Bizcocho húmedo de chocolate, decorado con trufas y bombones.</p>
+          </article>
+          <article class="fav-card">
+            <div class="fav-foto rosa"><div class="plato blanco v2"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <h3>Media torta de chocolate</h3>
+            <p>Rellena de mousse de chocolate, ideal para compartir en casa.</p>
+          </article>
+          <article class="fav-card">
+            <div class="fav-foto azul"><div class="plato blanco v3"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <h3>Porción de torta de chocolate</h3>
+            <p>Una porción generosa para darte un gusto cuando quieras.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Grupo 2: personalizadas -->
+      <div class="fav-grupo personalizadas">
+        <div class="encabezado">
+          <span class="script frase-linea">Diseñadas para tu celebración</span>
+          <h3 class="titulo-grande">Tortas Personalizadas</h3>
+          <p class="lead">Cuéntanos qué celebras y la creamos contigo: el <strong>sabor</strong>, los <strong>colores</strong>, el <strong>nombre</strong> y la temática de tu fiesta. Cada torta es única, hecha a mano y por encargo.</p>
+          <a class="btn btn-cta js-wa" href="https://wa.me/" target="_blank" rel="noopener">Ver opciones y sabores <svg><use href="#i-arrow"/></svg></a>
+        </div>
+        <!-- Collage de fotos tipo polaroid -->
+        <div class="collage">
+          <figure class="polaroid izq">
+            <div class="fav-foto"><div class="plato blanco"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <figcaption><b>Tortas de cumpleaños</b><span>Con el nombre, los colores y los detalles que imaginaste.</span></figcaption>
+          </figure>
+          <figure class="polaroid centro-c">
+            <div class="fav-foto rosa"><div class="plato blanco v2"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <figcaption><b>Tortas temáticas</b><span>Decoradas con la temática o el personaje de tu fiesta.</span></figcaption>
+          </figure>
+          <figure class="polaroid der">
+            <div class="fav-foto azul"><div class="plato blanco v3"><img class="sin-fondo" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas" width="604" height="524" loading="lazy"></div></div>
+            <figcaption><b>Mini cakes para regalar</b><span>Detalles dulces para fechas especiales y sorpresas.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b. PROMOCIONES DEL MES -->
+  <section class="promos" id="promociones">
+    <div class="wrap">
+      <div class="encabezado promos-cab">
+        <span class="script">Antojos con descuento</span>
+        <h2>Promociones del Mes</h2>
+      </div>
+      <div class="promos-top">
+        <div class="encabezado">
+          <span class="script frase-linea">Solo este mes</span>
+          <h3 class="titulo-grande">Dulces a precio especial</h3>
+          <p class="lead">Cada mes elegimos algunos de nuestros postres favoritos para que los disfrutes a un <strong>precio especial</strong>. Aprovecha antes de que termine <strong>el mes</strong>: las promociones cambian cada mes.</p>
+          <a class="btn btn-cta js-wa" href="https://wa.me/" target="_blank" rel="noopener">Ver promociones en el catálogo <svg><use href="#i-arrow"/></svg></a>
+        </div>
+        <!-- Splash + torta, igual que en el inicio -->
+        <div class="promo-visual">
+          <img class="splash" src="assets/splash-morado.png" alt="" width="760" height="710">
+          <img class="pastel" src="assets/torta-chocolate-sin-fondo.png" alt="Torta de chocolate con trufas de Dulcito Abril" width="604" height="524" loading="lazy">
+          <span class="sello-promo"><small>Promo</small><b>del mes</b><small>Por tiempo<br>limitado</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LÍNEA SALUDABLE -->
+  <section class="saludable" id="saludable">
+    <div class="wrap">
+      <!-- #SinCulpa grande sobre el splash azul -->
+      <div class="sincul-hero" aria-hidden="true">
+        <img class="splash" src="assets/splash-azul.png" alt="" width="760" height="710">
+        <span class="sincul-big">#SinCulpa</span>
+      </div>
+      <h2 class="sal-titulo">Nueva Línea</h2>
+
+      <div class="sal-grid">
+        <div class="sal-texto">
+          <span class="script frase-linea">Darte un gusto y cuidarte</span>
+          <h2>Repostería Saludable</h2>
+          <p>Todo el diseño y sabor que nos caracteriza, ahora adaptado a tu estilo de vida. Hemos creado una nueva selección de postres <strong>sin azúcar refinada</strong> y <strong>sin harina de trigo</strong> para que cuidarte sea un placer, no un sacrificio.</p>
+          <a class="btn btn-cta" href="#saludable-opciones">Descubrir opciones saludables</a>
+        </div>
+        <div class="sal-bento" id="saludable-opciones">
+          <div class="sal-foto azul grande"><div><b>🫐</b><small>Foto del postre</small></div></div>
+          <div class="sal-foto rosa"><div><b>🥥</b><small>Foto del postre</small></div></div>
+          <div class="sal-foto"><div><b>🍯</b><small>Foto del postre</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. RINCÓN DE RECETAS -->
+  <section class="recetas" id="recetas">
+    <div class="wrap">
+      <div class="encabezado">
+        <span class="script">El secreto es compartir</span>
+        <h2>Rincón de Recetas</h2>
+      </div>
+      <div class="recetas-grid">
+        <article class="receta">
+          <div class="receta-foto azul"><div><b>🧁</b><small>Foto de la receta</small></div></div>
+          <div class="receta-cuerpo">
+            <h3>Muffins de Arándanos Saludables</h3>
+            <a href="#recetas">Ver receta →</a>
+          </div>
+        </article>
+        <article class="receta">
+          <div class="receta-foto rosa"><div><b>🍪</b><small>Foto de la receta</small></div></div>
+          <div class="receta-cuerpo">
+            <h3>Galletas de Avena y Chocolate</h3>
+            <a href="#recetas">Ver receta →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. QUIÉN SOY -->
+  <section class="quien" id="quien-soy">
+    <div class="wrap">
+      <figure class="retrato-fig">
+        <div class="retrato">
+        </div>
+        <figcaption>Aquí irá tu foto</figcaption>
+      </figure>
+      <div class="quien-texto">
+        <span class="script">Detrás del delantal</span>
+        <h2>Hola, soy [Tu Nombre]</h2>
+        <p>Hornear es mi manera de crear momentos felices. Cada torta que sale de mi cocina empieza con una conversación: qué celebras, qué sabores te gustan y cómo quieres que se vea.</p>
+        <p>En Dulcito Abril combino las recetas clásicas que todos recordamos con un toque de diseño propio, y ahora también con opciones saludables para quienes quieren darse un gusto sin descuidarse.</p>
+        <div class="firma">Con cariño, [Tu Nombre]<small>Fundadora y repostera de Dulcito Abril</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RESEÑAS -->
+  <section class="resenas" id="resenas">
+    <div class="wrap">
+      <div class="encabezado">
+        <div class="plato" aria-hidden="true"></div>
+        <span class="script">Amor a primer bocado</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+        <span class="aviso">Gracias por dejarnos ser el toque dulce de tus celebraciones.</span>
+      </div>
+      <!-- Carrusel de reseñas: para agregar una nueva, copia un <article class="resena"> dentro de .car-pista -->
+      <div class="carrusel" aria-roledescription="carrusel" aria-label="Reseñas de clientes">
+        <button class="car-btn car-prev" type="button" aria-label="Reseña anterior"><svg><use href="#i-arrow"/></svg></button>
+        <div class="car-pista" tabindex="0">
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“La tres leches del cumpleaños de mi mamá desapareció en minutos. Húmeda, nada empalagosa y preciosa.”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Torta Tres Leches</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Por fin un brownie sin azúcar refinada que sabe a brownie de verdad. Ya hice mi segundo pedido.”</blockquote>
+            <footer><span class="avatar azul">C</span><div><b>Cliente · ejemplo</b><span>Línea saludable</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Me ayudaron a elegir por WhatsApp y llegó puntual y perfecto. El quesillo es igualito al de la abuela.”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Quesillo</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Pedí una torta temática para el cumpleaños de mi hijo y quedó idéntica a lo que imaginamos. ¡Fue la sensación!”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Torta personalizada</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Las mini cakes del Día de la Madre fueron el regalo perfecto. Todas preguntaron dónde las había comprado.”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Mini cakes</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Los muffins de arándanos sin azúcar refinada son mi merienda de toda la semana. Nadie cree que sean saludables.”</blockquote>
+            <footer><span class="avatar azul">C</span><div><b>Cliente · ejemplo</b><span>Línea saludable</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“La torta de chocolate con trufas es una locura. Bien húmeda y con el dulce justo.”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Torta de Chocolate</span></div></footer>
+          </article>
+          <article class="resena">
+            <div class="estrellas" aria-label="5 de 5 estrellas"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <blockquote>“Atención súper cariñosa y entrega puntual. Ya es mi repostería de confianza para cada celebración.”</blockquote>
+            <footer><span class="avatar">C</span><div><b>Cliente · ejemplo</b><span>Pedido por encargo</span></div></footer>
+          </article>
+        </div>
+        <button class="car-btn car-next" type="button" aria-label="Reseña siguiente"><svg><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="car-puntos" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 7. COMUNIDAD -->
+  <section class="comunidad" id="comunidad">
+    <div class="wrap">
+      <div class="encabezado">
+        <span class="script">Más dulzura en nuestras redes</span>
+        <h2>Únete a nuestra comunidad</h2>
+      </div>
+      <!-- Videos de redes: guarda los archivos en assets con estos nombres y aparecen solos
+           (instagram-1.mp4, instagram-2.mp4, tiktok-1.mp4, tiktok-2.mp4). Mientras no estén, se ve un espacio de muestra. -->
+      <div class="redes">
+        <div class="red">
+          <div class="red-cab"><b><svg><use href="#i-ig"/></svg>Instagram</b><a class="js-ig" href="https://www.instagram.com/dulcito_abril/" target="_blank" rel="noopener">Seguir →</a></div>
+          <div class="clips">
+            <a class="clip js-ig" href="https://www.instagram.com/dulcito_abril/" target="_blank" rel="noopener" aria-label="Ver video en Instagram">
+              <video src="assets/instagram-1.mp4" muted loop playsinline preload="metadata"></video>
+              <span class="clip-ph"><svg><use href="#i-ig"/></svg><small>Video de Instagram</small></span>
+              <span class="play"><svg><use href="#i-play"/></svg></span>
+            </a>
+            <a class="clip rosa js-ig" href="https://www.instagram.com/dulcito_abril/" target="_blank" rel="noopener" aria-label="Ver video en Instagram">
+              <video src="assets/instagram-2.mp4" muted loop playsinline preload="metadata"></video>
+              <span class="clip-ph"><svg><use href="#i-ig"/></svg><small>Video de Instagram</small></span>
+              <span class="play"><svg><use href="#i-play"/></svg></span>
+            </a>
+          </div>
+        </div>
+        <div class="red">
+          <div class="red-cab"><b><svg><use href="#i-tt"/></svg>TikTok</b><a class="js-tt" href="https://www.tiktok.com/@dulcito_abril" target="_blank" rel="noopener">Ver videos →</a></div>
+          <div class="clips">
+            <a class="clip azul" href="https://www.tiktok.com/@dulcito_abril/video/7512619499812670725" target="_blank" rel="noopener" aria-label="Ver video de pie de limón en TikTok">
+              <video src="assets/tiktok-1.mp4" muted loop playsinline preload="metadata"></video>
+              <span class="clip-ph"><svg><use href="#i-tt"/></svg><small>Video de TikTok</small></span>
+              <span class="play"><svg><use href="#i-play"/></svg></span>
+            </a>
+            <a class="clip" href="https://www.tiktok.com/@dulcito_abril/video/7487004591666629943" target="_blank" rel="noopener" aria-label="Ver video de torta de chocolate en TikTok">
+              <video src="assets/tiktok-2.mp4" muted loop playsinline preload="metadata"></video>
+              <span class="clip-ph"><svg><use href="#i-tt"/></svg><small>Video de TikTok</small></span>
+              <span class="play"><svg><use href="#i-play"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <div class="marca">
+      <img src="assets/logo-negativo.png" alt="Dulcito Abril" width="900" height="370">
+      <small>RIF J-504023035</small>
+    </div>
+    <nav aria-label="Pie de página">
+      <a href="#favoritos">Favoritos</a>
+      <a href="#promociones">Promociones</a>
+      <a href="#saludable">Saludable</a>
+      <a href="#recetas">Recetas</a>
+      <a href="#quien-soy">Quién soy</a>
+      <a class="js-ig" href="https://www.instagram.com/dulcito_abril/" target="_blank" rel="noopener">Instagram</a>
+      <a class="js-tt" href="https://www.tiktok.com/@dulcito_abril" target="_blank" rel="noopener">TikTok</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Botones flotantes: Mi catálogo y WhatsApp -->
+<div class="flotantes">
+  <a class="flotante catalogo" href="#favoritos">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 10.5h5"/></svg>
+    Mi catálogo
+  </a>
+  <a class="flotante whatsapp js-wa" href="https://wa.me/" target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#i-wa"/></svg>
+    ¿Te ayudamos a elegir?
+  </a>
+</div>
+
+<script>
+// Configura aquí tus datos. WhatsApp: código de país + número, sin "+" ni espacios (ej. 58412...)
+const CONFIG = {
+  whatsapp: "",
+  mensaje: "¡Hola Dulcito Abril! Quiero hacer un pedido 🍰",
+  instagram: "dulcito_abril", // usuario sin @
+  tiktok: "dulcito_abril"     // usuario sin @
+};
+
+(function () {
+  if (CONFIG.whatsapp) {
+    const url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.mensaje);
+    document.querySelectorAll(".js-wa").forEach(a => a.href = url);
+  }
+  if (CONFIG.instagram) document.querySelectorAll(".js-ig").forEach(a => a.href = "https://www.instagram.com/" + CONFIG.instagram + "/");
+  if (CONFIG.tiktok) document.querySelectorAll(".js-tt").forEach(a => a.href = "https://www.tiktok.com/@" + CONFIG.tiktok);
+
+  // Separador con video de crema (sin audio), en bucle con fundido suave al reiniciar.
+  // Modo 1 (WebGL): quita el fondo del video y lo tiñe del morado de la marca en un <canvas>.
+  // Modo 2 (sin WebGL o abierto con doble clic): el filtro CSS #goteo-tinte hace el trabajo.
+  (function () {
+    const caja = document.querySelector(".goteo");
+    if (!caja) return;
+    const capa = caja.querySelector(".goteo-capa");
+    const videoA = capa.querySelector("video");
+    const lienzo = caja.querySelector("canvas");
+    const FUNDIDO = 1.5;
+    const reducir = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    videoA.muted = true;
+
+    // Segundo video (copia) para fundir el final con el inicio
+    const videoB = videoA.cloneNode();
+    videoB.muted = true;
+    videoB.style.opacity = "0";
+    capa.appendChild(videoB);
+    let actual = videoA, siguiente = videoB, fundiendo = false, visible = false;
+
+    // ---------- WebGL ----------
+    let gl = null, prog, texA, texB, uRect, uMezcla, listo = false;
+    try { gl = lienzo.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false }); } catch (e) { gl = null; }
+    if (gl) {
+      const vs = "attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}";
+      const fs = [
+        "precision mediump float;varying vec2 v;uniform sampler2D t0;uniform sampler2D t1;uniform vec4 r;uniform float m;",
+        "const vec3 FONDO=vec3(.945,.863,.890);const vec3 MARCA=vec3(.502,.082,.576);",
+        "vec4 crema(sampler2D t){",
+        " vec3 c=texture2D(t,r.xy+v*r.zw).rgb;",
+        " float a=smoothstep(.045,.16,distance(c,FONDO));",
+        " vec3 pura=clamp((c-(1.-a)*FONDO)/max(a,.01),0.,1.);",
+        " float l=dot(pura,vec3(.299,.587,.114));",
+        " vec3 col=MARCA*clamp(l/.42,0.,1.2);",
+        " col=mix(col,vec3(1.),smoothstep(.64,.92,l)*.7);",
+        " return vec4(col*a,a);",
+        "}",
+        "void main(){",
+        " vec4 o=crema(t0);",
+        " if(m>0.)o=mix(o,crema(t1),m);",
+        " o*=1.-smoothstep(.72,1.,v.y);",
+        " gl_FragColor=o;",
+        "}"
+      ].join("");
+      const sh = (tipo, src) => { const s = gl.createShader(tipo); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) gl = null;
+    }
+    if (gl) {
+      gl.useProgram(prog);
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, "p");
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const nuevaTextura = (unidad) => {
+        const t = gl.createTexture();
+        gl.activeTexture(gl.TEXTURE0 + unidad);
+        gl.bindTexture(gl.TEXTURE_2D, t);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        return t;
+      };
+      texA = nuevaTextura(0);
+      texB = nuevaTextura(1);
+      gl.uniform1i(gl.getUniformLocation(prog, "t0"), 0);
+      gl.uniform1i(gl.getUniformLocation(prog, "t1"), 1);
+      uRect = gl.getUniformLocation(prog, "r");
+      uMezcla = gl.getUniformLocation(prog, "m");
+    }
+    function subir(textura, unidad, video) {
+      gl.activeTexture(gl.TEXTURE0 + unidad);
+      gl.bindTexture(gl.TEXTURE_2D, textura);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);
+    }
+    function dibujarGL(mezcla) {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.round(caja.clientWidth * dpr), h = Math.round(caja.clientHeight * dpr);
+      if (!w || !h) return;
+      if (lienzo.width !== w || lienzo.height !== h) { lienzo.width = w; lienzo.height = h; }
+      // "cover" a todo el ancho, empezando un poco debajo del borde superior del video;
+      // se recorta un 3 % a cada lado para que no asomen las esquinas del video
+      const A = w / h, V = actual.videoWidth / actual.videoHeight;
+      const alto = Math.min(1, 0.94 * V / A), y0 = Math.min(0.2, 1 - alto);
+      const rect = A > V ? [0.03, y0, 0.94, alto] : [(1 - A / V) / 2, 0, A / V, 1];
+      try {
+        subir(texA, 0, actual);
+        if (mezcla > 0 && siguiente.readyState >= 2) subir(texB, 1, siguiente); else mezcla = 0;
+      } catch (e) {
+        // el navegador no deja leer el video (p. ej. archivo abierto con doble clic): modo 2
+        gl = null; caja.classList.remove("webgl"); return;
+      }
+      gl.viewport(0, 0, w, h);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform4f(uRect, rect[0], rect[1], rect[2], rect[3]);
+      gl.uniform1f(uMezcla, mezcla);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (!listo) { listo = true; caja.classList.add("webgl"); }
+    }
+
+    // ---------- bucle con fundido (común a los dos modos) ----------
+    function cuadro() {
+      if (actual.readyState < 2) return;
+      let mezcla = 0;
+      const dur = actual.duration;
+      if (!reducir && isFinite(dur) && dur > FUNDIDO * 2) {
+        const resta = dur - actual.currentTime;
+        if (resta <= FUNDIDO) {
+          if (!fundiendo) {
+            fundiendo = true;
+            siguiente.currentTime = 0;
+            const p = siguiente.play(); if (p && p.catch) p.catch(() => {});
+          }
+          mezcla = Math.min(1, Math.max(0, 1 - resta / FUNDIDO));
+        }
+      }
+      // modo 2: el siguiente aparece encima del actual
+      actual.style.opacity = "1";
+      siguiente.style.opacity = String(mezcla);
+      if (gl) dibujarGL(mezcla);
+    }
+    function alTerminar(e) {
+      if (e.target !== actual) return;
+      const viejo = actual;
+      actual = siguiente; siguiente = viejo;
+      fundiendo = false;
+      viejo.pause();
+      viejo.currentTime = 0;
+      // el nuevo "actual" debe quedar debajo para que el próximo fundido aparezca encima
+      capa.insertBefore(actual, viejo);
+      viejo.style.opacity = "0";
+      actual.style.opacity = "1";
+      if (visible && actual.paused) { const p = actual.play(); if (p && p.catch) p.catch(() => {}); }
+    }
+    videoA.addEventListener("ended", alTerminar);
+    videoB.addEventListener("ended", alTerminar);
+
+    function bucle() {
+      cuadro();
+      if (visible && !reducir) requestAnimationFrame(bucle);
+    }
+    videoA.addEventListener("loadeddata", () => { if (reducir) videoA.currentTime = Math.max(0, videoA.duration - 0.2); cuadro(); });
+    videoA.addEventListener("seeked", () => { if (actual === videoA) cuadro(); });
+    if (videoA.readyState >= 2) cuadro();
+    window.addEventListener("resize", cuadro);
+
+    // Se reproduce mientras está en pantalla y se pausa al salir para no gastar recursos
+    if (!reducir) {
+      const entrar = () => {
+        const p = actual.play(); if (p && p.catch) p.catch(() => {});
+        if (fundiendo) siguiente.play().catch(() => {});
+        requestAnimationFrame(bucle);
+      };
+      const salir = () => { actual.pause(); siguiente.pause(); };
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver((entradas) => {
+          entradas.forEach((en) => {
+            const antes = visible;
+            visible = en.isIntersecting;
+            if (visible && !antes) entrar();
+            else if (!visible && antes) salir();
+          });
+        }, { threshold: [0, 0.25] }).observe(caja);
+      } else { visible = true; entrar(); }
+    }
+  })();
+
+  // Sello de promociones: se "estampa" cuando entra en pantalla (si no hay soporte, se ve quieto)
+  (function () {
+    const sello = document.querySelector(".sello-promo");
+    if (!sello || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    sello.classList.add("por-estampar");
+    new IntersectionObserver((entradas, obs) => {
+      entradas.forEach((en) => {
+        if (!en.isIntersecting) return;
+        sello.classList.remove("por-estampar");
+        sello.classList.add("estampado");
+        obs.disconnect();
+      });
+    }, { threshold: 0.45 }).observe(sello.parentElement);
+  })();
+
+  // Menú del teléfono: abre/cierra con el botón y se cierra al elegir una sección
+  (function () {
+    const cab = document.querySelector(".top");
+    const btn = document.getElementById("menu-btn");
+    if (!cab || !btn) return;
+    const fijar = (abierto) => {
+      cab.classList.toggle("abierto", abierto);
+      btn.setAttribute("aria-expanded", String(abierto));
+      btn.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+    };
+    btn.addEventListener("click", () => fijar(!cab.classList.contains("abierto")));
+    cab.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", () => fijar(false)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") fijar(false); });
+  })();
+
+  // Carrusel de reseñas: flechas, puntos, deslizar con el dedo y avance automático (se pausa al tocarlo)
+  (function () {
+    const car = document.querySelector(".carrusel");
+    if (!car) return;
+    const pista = car.querySelector(".car-pista");
+    const tarjetas = Array.from(pista.children);
+    const puntos = document.querySelector(".car-puntos");
+    const reducir = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let botones = [], pausado = false, temporizador = null;
+
+    const paso = () => {
+      const t = tarjetas[0];
+      const gap = parseFloat(getComputedStyle(pista).columnGap) || 0;
+      return t ? t.getBoundingClientRect().width + gap : pista.clientWidth;
+    };
+    const visibles = () => Math.max(1, Math.round(pista.clientWidth / paso()));
+    const paginas = () => Math.max(1, tarjetas.length - visibles() + 1);
+    const actual = () => Math.round(pista.scrollLeft / paso());
+    const ir = (i) => {
+      const total = paginas();
+      const destino = ((i % total) + total) % total; // al pasar el final vuelve al inicio
+      pista.scrollTo({ left: destino * paso(), behavior: reducir ? "auto" : "smooth" });
+    };
+
+    function crearPuntos() {
+      puntos.innerHTML = "";
+      botones = [];
+      for (let i = 0; i < paginas(); i++) {
+        const b = document.createElement("button");
+        b.type = "button"; b.tabIndex = -1;
+        b.addEventListener("click", () => { ir(i); reiniciar(); });
+        puntos.appendChild(b);
+        botones.push(b);
+      }
+      marcar();
+    }
+    function marcar() {
+      const a = Math.min(actual(), botones.length - 1);
+      botones.forEach((b, i) => b.classList.toggle("activo", i === a));
+    }
+
+    car.querySelector(".car-prev").addEventListener("click", () => { ir(actual() - 1); reiniciar(); });
+    car.querySelector(".car-next").addEventListener("click", () => { ir(actual() + 1); reiniciar(); });
+    pista.addEventListener("scroll", () => requestAnimationFrame(marcar), { passive: true });
+    pista.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); ir(actual() + 1); reiniciar(); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); ir(actual() - 1); reiniciar(); }
+    });
+    window.addEventListener("resize", crearPuntos);
+
+    // Avance automático cada 5 s; se pausa con el mouse encima, al enfocar o al tocar
+    function iniciar() { if (!reducir && !temporizador) temporizador = setInterval(() => { if (!pausado) ir(actual() + 1); }, 5000); }
+    function reiniciar() { clearInterval(temporizador); temporizador = null; iniciar(); }
+    ["mouseenter", "focusin", "touchstart"].forEach((ev) => car.addEventListener(ev, () => { pausado = true; }, { passive: true }));
+    ["mouseleave", "focusout", "touchend"].forEach((ev) => car.addEventListener(ev, () => { pausado = false; }, { passive: true }));
+
+    crearPuntos();
+    iniciar();
+  })();
+
+  // Videos de redes: si el archivo existe se muestra; se reproducen (sin sonido) solo mientras están en pantalla
+  (function () {
+    const reducir = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const clips = document.querySelectorAll(".clip video");
+    const obs = ("IntersectionObserver" in window) ? new IntersectionObserver((entradas) => {
+      entradas.forEach((en) => {
+        const v = en.target;
+        if (en.isIntersecting && !reducir) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.35 }) : null;
+    clips.forEach((v) => {
+      v.muted = true;
+      const tarjeta = v.closest(".clip");
+      const listo = () => { tarjeta.classList.add("con-video"); if (obs) obs.observe(v); };
+      if (v.readyState >= 2) listo(); else v.addEventListener("loadeddata", listo, { once: true });
+      v.addEventListener("play", () => tarjeta.classList.add("reproduciendo"));
+      v.addEventListener("pause", () => tarjeta.classList.remove("reproduciendo"));
+    });
+  })();
+
+})();
+</script>
